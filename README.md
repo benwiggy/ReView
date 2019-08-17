@@ -10,4 +10,11 @@ MacOS has some incredibly powerful and flexible APIs for viewing, printing and c
 3. Improved AppleScript support.
 
 
-Much of this is currently far beyond my abilities, so please feel free to contribute! The v.1.0 goal is to produce an app which loads images and PDFs for viewing and printing only.
+Much of this is currently far beyond my abilities, so please feel free to contribute! The project goals are as follows:
+
+* Open, view and print PDFs
+* Open view and print other images
+* Export files to other formats
+* Apply Quartz Filters to PDFs
+* Add Bookmarks (actual PDF-spec 'Outlines', not Apple's unique Bookmarks metadata!)
+
