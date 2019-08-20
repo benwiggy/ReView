@@ -3,14 +3,16 @@ A better attempt at Apple's own Preview app
 
 MacOS has some incredibly powerful and flexible APIs for viewing, printing and converting images to other formats. It's such a shame that Apple's own Preview application has been woeful in implementing them. This project hopes to improve on Preview in the following ways:
 
-1. Loaded documents will not be auto-saved without the user's express permission. By default, alteration suggests saving with a new name. This is important, as PDF files and images may be originals that should not be overwritten. PDFKit is not capable of replicating all types of PDF (v1.7, PDF/A, etc); also successive JPEGing may cause lossage. Disabling auto-saving is no longer possible on a per-app basis.
+1. Loaded documents will not be auto-saved without the user's express permission. By default, alteration suggests saving with a new name. This is important, as PDF files and images may be originals that should not be overwritten. PDFKit is not capable of replicating all types of PDF (e.g. PDF/A, etc); also successive JPEGing of images may cause lossage. Disabling auto-saving is no longer possible on a per-app basis.
 
 2. Improved Exporting of file types and modification of PDFs using Quartz Filters. Currently, Preview has both "Export As PDF" and "Export...." with format PDF. They work in different ways, of course, but it's a terrible UI. It would also be nice to see Quartz Filters applied in a similar way to ColorSync Utility.
 
 3. Support creation and editing of PDF Bookmarks (e.g. Table of Contents). Preview's own 'bookmarks' are proprietary: they do not work in other PDF viewers. PDFKit has a perfectly good set of objects (PDFOutline) for working with bookmarks.
 
-4. Improved AppleScript support. Preview has only recently included any AppleScript support, and most of it is 'generic'. It would be good to include exporting to other formats
+4. Save As PDF/X-3 (using better Filter than Apple's own); individual pages; booklet. Add a variety of text of graphics to existing document.
 
-Currently, ReView will open PDF documents for viewing and printing. 
+5. Improved AppleScript support. Preview has only recently included any AppleScript support, and most of it is 'generic'. It would be good to include exporting to other formats
+
+Currently, version 0.1 of ReView will open PDF documents for viewing and printing. It will also Save, if asked.
 
 Much of this is far beyond my abilities, so please feel free to contribute! Grateful Acknowledgement is made to Howard Oakley, who provided the basic code to get the app up and running.
