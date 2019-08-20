@@ -3,61 +3,61 @@
     {
       "size" : "16x16",
       "idiom" : "mac",
-      "filename" : "Review icon2-16.png",
+      "filename" : "Review icon-16.png",
       "scale" : "1x"
     },
     {
       "size" : "16x16",
       "idiom" : "mac",
-      "filename" : "Review icon2-32.png",
+      "filename" : "Review icon-33.png",
       "scale" : "2x"
     },
     {
       "size" : "32x32",
       "idiom" : "mac",
-      "filename" : "Review icon2-33.png",
+      "filename" : "Review icon-32.png",
       "scale" : "1x"
     },
     {
       "size" : "32x32",
       "idiom" : "mac",
-      "filename" : "Review icon2-64.png",
+      "filename" : "Review icon-64.png",
       "scale" : "2x"
     },
     {
       "size" : "128x128",
       "idiom" : "mac",
-      "filename" : "Review icon2-128.png",
+      "filename" : "Review icon-128.png",
       "scale" : "1x"
     },
     {
       "size" : "128x128",
       "idiom" : "mac",
-      "filename" : "Review icon2-256.png",
+      "filename" : "Review icon-257.png",
       "scale" : "2x"
     },
     {
       "size" : "256x256",
       "idiom" : "mac",
-      "filename" : "Review icon2-257.png",
+      "filename" : "Review icon-256.png",
       "scale" : "1x"
     },
     {
       "size" : "256x256",
       "idiom" : "mac",
-      "filename" : "Review icon2-512.png",
+      "filename" : "Review icon-513.png",
       "scale" : "2x"
     },
     {
       "size" : "512x512",
       "idiom" : "mac",
-      "filename" : "Review icon2-513.png",
+      "filename" : "Review icon-512.png",
       "scale" : "1x"
     },
     {
       "size" : "512x512",
       "idiom" : "mac",
-      "filename" : "Review icon2-1024.png",
+      "filename" : "Review icon-1024.png",
       "scale" : "2x"
     }
   ],

@@ -64,8 +64,10 @@ class ViewController: NSViewController {
     @IBAction func printContent(_ sender: Any) {
        let printOperation = thePDFView.document?.printOperation(for: thePrintInfo(), scalingMode: .pageScaleNone, autoRotate: true)
     printOperation?.printPanel = thePrintPanel()
+       /// Would prefer to use .runModal but don't know what the parameters should be.
     printOperation?.run()
     }
+    
     
 }
 
