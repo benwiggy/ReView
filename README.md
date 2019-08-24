@@ -9,10 +9,10 @@ MacOS has some incredibly powerful and flexible APIs for viewing, printing and c
 
 3. Support creation and editing of PDF Bookmarks (e.g. Table of Contents). Preview's own 'bookmarks' are proprietary: they do not work in other PDF viewers. PDFKit has a perfectly good set of objects (PDFOutline) for working with bookmarks.
 
-4. Save As PDF/X-3 (using better Filter than Apple's own); individual pages; booklet. Add a variety of text of graphics to existing document.
+4. Save As PDF/X-3 (using a better Filter than Apple's own); individual pages; booklet. Add a variety of text of graphics to existing document.
 
 5. Improved AppleScript support. Preview has only recently included any AppleScript support, and most of it is 'generic'. It would be good to include exporting to other formats
 
-Currently, version 0.1 of ReView will open PDF documents for viewing and printing. It will also Save, if asked.
+Currently, version 0.1 of ReView will open PDF documents for viewing and printing. It can View Single or Continuous pages, 1-up or 2-up (with first page on its own or not). It will also Save, if asked.
 
 Much of this is far beyond my abilities, so please feel free to contribute! Grateful Acknowledgement is made to Howard Oakley, who provided the basic code to get the app up and running.
