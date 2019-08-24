@@ -612,6 +612,36 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="hB3-LF-h0Y"/>
+                                        <menuItem title="Single Page" keyEquivalent="1" id="uYF-MD-7KF">
+                                            <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="singlePage:" target="Ady-hI-5gd" id="jsj-Vc-Sqh"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Single Page Continuous" keyEquivalent="1" id="yDG-Q9-bGx">
+                                            <connections>
+                                                <action selector="singleCont:" target="Ady-hI-5gd" id="cwR-3r-v2I"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Two Pages" keyEquivalent="2" id="wEB-gi-IFJ">
+                                            <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="TwoPages:" target="Ady-hI-5gd" id="pov-NO-4fv"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Two Pages Continuous" keyEquivalent="2" id="BSf-CQ-tOM">
+                                            <connections>
+                                                <action selector="TwoCont:" target="Ady-hI-5gd" id="Vp9-87-t2m"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="6Qn-xp-2mq"/>
+                                        <menuItem title="First Page is Cover" state="on" id="Wse-DR-NqK">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="FirstCover:" target="Ady-hI-5gd" id="qDp-Uw-97Z"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="abi-El-WLZ"/>
                                         <menuItem title="Show Sidebar" keyEquivalent="s" id="kIP-vf-haE">
                                             <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                                             <connections>
@@ -674,8 +704,9 @@
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="ReView" customModuleProvider="target"/>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController representsSharedInstance="YES" id="Ycq-n6-NWc"/>
             </objects>
-            <point key="canvasLocation" x="75" y="0.0"/>
+            <point key="canvasLocation" x="-117" y="-685"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -696,72 +727,97 @@
                 </windowController>
                 <customObject id="6f7-a7-6o1" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="250"/>
+            <point key="canvasLocation" x="-43" y="87"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
                 <viewController id="5gI-5U-AMq" customClass="ViewController" customModule="ReView" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="ERx-hH-rdd">
-                        <rect key="frame" x="0.0" y="0.0" width="714" height="790"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1013" height="869"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <splitView arrangesAllSubviews="NO" dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jLA-4J-Wcn">
-                                <rect key="frame" x="0.0" y="0.0" width="714" height="790"/>
+                            <splitView arrangesAllSubviews="NO" dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bff-KZ-cjM">
+                                <rect key="frame" x="0.0" y="0.0" width="1013" height="869"/>
                                 <subviews>
-                                    <customView id="PdV-Df-Lp7">
-                                        <rect key="frame" x="0.0" y="0.0" width="89" height="790"/>
+                                    <customView id="ret-Ke-fJb">
+                                        <rect key="frame" x="0.0" y="0.0" width="150" height="869"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
-                                            <pdfThumbnailView wantsLayer="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1oT-20-IAE">
-                                                <rect key="frame" x="0.0" y="0.0" width="80" height="790"/>
-                                                <size key="thumbnailSize" width="64" height="64"/>
+                                            <pdfThumbnailView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QuC-JU-lay">
+                                                <rect key="frame" x="0.0" y="0.0" width="150" height="869"/>
+                                                <size key="thumbnailSize" width="1024" height="1024"/>
                                             </pdfThumbnailView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="1oT-20-IAE" firstAttribute="leading" secondItem="PdV-Df-Lp7" secondAttribute="leading" id="9dN-gL-vgv"/>
-                                            <constraint firstAttribute="trailing" secondItem="1oT-20-IAE" secondAttribute="trailing" id="FHr-Tr-28L"/>
-                                            <constraint firstAttribute="bottom" secondItem="1oT-20-IAE" secondAttribute="bottom" id="i2s-L0-rbi"/>
-                                            <constraint firstItem="1oT-20-IAE" firstAttribute="top" secondItem="PdV-Df-Lp7" secondAttribute="top" id="lWh-zo-3dX"/>
+                                            <constraint firstAttribute="trailing" secondItem="QuC-JU-lay" secondAttribute="trailing" id="fe9-J1-IiL"/>
+                                            <constraint firstAttribute="bottom" secondItem="QuC-JU-lay" secondAttribute="bottom" id="ftb-kE-qh7"/>
+                                            <constraint firstItem="QuC-JU-lay" firstAttribute="top" secondItem="ret-Ke-fJb" secondAttribute="top" id="gzF-qL-xNs"/>
+                                            <constraint firstItem="QuC-JU-lay" firstAttribute="leading" secondItem="ret-Ke-fJb" secondAttribute="leading" id="wsT-6N-vS1"/>
                                         </constraints>
                                     </customView>
-                                    <customView id="8ES-u6-T3r">
-                                        <rect key="frame" x="99" y="0.0" width="615" height="790"/>
+                                    <customView fixedFrame="YES" id="RdM-83-nS7">
+                                        <rect key="frame" x="160" y="0.0" width="853" height="869"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
-                                            <pdfView autoresizesSubviews="NO" wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gYE-X7-9Fe">
-                                                <rect key="frame" x="0.0" y="0.0" width="615" height="790"/>
+                                            <pdfView autoresizesSubviews="NO" wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kRq-36-uoz">
+                                                <rect key="frame" x="0.0" y="0.0" width="853" height="869"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             </pdfView>
                                         </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="gYE-X7-9Fe" secondAttribute="bottom" id="7CS-Of-CIB"/>
-                                            <constraint firstItem="gYE-X7-9Fe" firstAttribute="leading" secondItem="8ES-u6-T3r" secondAttribute="leading" id="ZG6-bN-mbz"/>
-                                            <constraint firstAttribute="trailing" secondItem="gYE-X7-9Fe" secondAttribute="trailing" id="kVf-ho-Bwp"/>
-                                            <constraint firstItem="gYE-X7-9Fe" firstAttribute="top" secondItem="8ES-u6-T3r" secondAttribute="top" id="mLD-ak-5pq"/>
-                                        </constraints>
                                     </customView>
                                 </subviews>
                                 <holdingPriorities>
-                                    <real value="100"/>
+                                    <real value="250"/>
                                     <real value="100"/>
                                 </holdingPriorities>
                             </splitView>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="jLA-4J-Wcn" secondAttribute="trailing" id="2R3-lL-DK0"/>
-                            <constraint firstItem="jLA-4J-Wcn" firstAttribute="top" secondItem="ERx-hH-rdd" secondAttribute="top" id="g62-sY-0ok"/>
-                            <constraint firstAttribute="bottom" secondItem="jLA-4J-Wcn" secondAttribute="bottom" id="jsO-SG-Agt"/>
-                            <constraint firstItem="jLA-4J-Wcn" firstAttribute="leading" secondItem="ERx-hH-rdd" secondAttribute="leading" id="kpb-Vu-dd1"/>
+                            <constraint firstAttribute="trailing" secondItem="bff-KZ-cjM" secondAttribute="trailing" id="6fw-vV-jj5"/>
+                            <constraint firstItem="bff-KZ-cjM" firstAttribute="leading" secondItem="ERx-hH-rdd" secondAttribute="leading" id="dQ4-FB-ajo"/>
+                            <constraint firstAttribute="bottom" secondItem="bff-KZ-cjM" secondAttribute="bottom" id="eZy-0U-NeM"/>
+                            <constraint firstItem="bff-KZ-cjM" firstAttribute="top" secondItem="ERx-hH-rdd" secondAttribute="top" id="l7k-eW-qrq"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="thePDFView" destination="gYE-X7-9Fe" id="QoJ-kb-n6T"/>
-                        <outlet property="theThumbnailView" destination="1oT-20-IAE" id="ANy-M7-Hca"/>
+                        <outlet property="thePDFView" destination="kRq-36-uoz" id="vZS-OE-jgh"/>
+                        <outlet property="theThumbnailView" destination="QuC-JU-lay" id="Mcj-kA-rAg"/>
                     </connections>
                 </viewController>
                 <customObject id="2Tp-Fl-jBw" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <toolbar implicitIdentifier="09D11707-F4A3-4FD5-970E-AC5832E91C2B" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="4Yq-h4-ssk">
+                    <allowedToolbarItems>
+                        <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="iQt-Wc-fNg"/>
+                        <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="LeM-0n-NcY"/>
+                        <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="7WG-hd-ehx">
+                            <connections>
+                                <action selector="printContent:" target="5gI-5U-AMq" id="u7I-Yf-5Yf"/>
+                            </connections>
+                        </toolbarItem>
+                        <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="m9y-0x-GGf"/>
+                        <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="BFd-Nq-VO1"/>
+                        <toolbarItem implicitItemIdentifier="C7A610A2-2B2F-47B5-9B86-616DD2458078" label="Custom View" paletteLabel="Custom View" sizingBehavior="auto" id="OmV-v3-qwB">
+                            <nil key="toolTip"/>
+                            <button key="view" verticalHuggingPriority="750" id="tmT-hs-AcZ">
+                                <rect key="frame" x="0.0" y="14" width="82" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="KEx-AF-6y2">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                        </toolbarItem>
+                    </allowedToolbarItems>
+                    <defaultToolbarItems>
+                        <toolbarItem reference="iQt-Wc-fNg"/>
+                        <toolbarItem reference="LeM-0n-NcY"/>
+                        <toolbarItem reference="BFd-Nq-VO1"/>
+                        <toolbarItem reference="7WG-hd-ehx"/>
+                    </defaultToolbarItems>
+                </toolbar>
             </objects>
-            <point key="canvasLocation" x="134" y="1216"/>
+            <point key="canvasLocation" x="279.5" y="1180.5"/>
         </scene>
     </scenes>
 </document>
