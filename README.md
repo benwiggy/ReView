@@ -11,8 +11,18 @@ MacOS has some incredibly powerful and flexible APIs for viewing, printing and c
 
 4. Save As PDF/X-3 (using a better Filter than Apple's own); individual pages; booklet. Add a variety of text of graphics to existing document.
 
-5. Improved AppleScript support. Preview has only recently included any AppleScript support, and most of it is 'generic'. It would be good to include exporting to other formats
-
-Currently, version 0.1 of ReView will open PDF documents for viewing and printing. It can View Single or Continuous pages, 1-up or 2-up (with first page on its own or not). It will also Save, if asked.
+5. Improved AppleScript support. Preview has only recently included any AppleScript support, and most of it is 'generic'. It would be good to include exporting to other formats.
 
 Much of this is far beyond my abilities, so please feel free to contribute! Grateful Acknowledgement is made to Howard Oakley, who provided the basic code to get the app up and running.
+
+# Release Notes
+
+### 0.1
+The first release of ReView does the following:
+* Opens PDFs for Viewing as 1-up or 2-up (with first page on its own or not); Single or Continuous pages.
+* Rotate individual pages left or right
+* Prints using accurate page positioning for duplexing with enhanced print panel.
+* Deletes individual pages (with warning).
+* Saves documents when asked, if altered.
+
+
