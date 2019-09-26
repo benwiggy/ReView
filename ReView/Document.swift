@@ -28,13 +28,15 @@ class Document: NSDocument {
         let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
         let windowController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier("Document Window Controller")) as! NSWindowController
         self.addWindowController(windowController)
+       // windowController.window?.titleVisibility = .hidden
     }
-
+/*
     override func data(ofType typeName: String) throws -> Data {
         // Insert code here to write your document to data of the specified type, throwing an error in case of failure.
         // Alternatively, you could remove this method and override fileWrapper(ofType:), write(to:ofType:), or write(to:ofType:for:originalContentsURL:) instead.
         throw NSError(domain: NSOSStatusErrorDomain, code: unimpErr, userInfo: nil)
-    }
+     }
+*/
 
     override func read(from data: Data, ofType typeName: String) throws {
         self.thePDFDocument = PDFDocument.init(data: data)
@@ -45,17 +47,12 @@ class Document: NSDocument {
     
     // Provide warning that Save will overwrite the existing file. Also allow user to turn it off.
     override func save(_ sender: Any?) {
-        let defaults = UserDefaults.standard
-        let alertSupressionKey = "AlertAlertSupression"
-        
-        // Reset default for testing
-        // defaults.set(false, forKey: alertSupressionKey)
-        
-        switch defaults.bool(forKey: alertSupressionKey){
+
+        switch self.isDocumentEdited {
         case false:
             let alert = NSAlert()
             alert.messageText = "Save Document?"
-            alert.informativeText = "ReView currently has no editing capabilities. \rSaving will 'rinse' the document through PDFKit."
+            alert.informativeText = "Document has not been altered. \rSaving will 'rinse' the document through PDFKit."
             alert.addButton(withTitle: "OK")
             alert.addButton(withTitle: "Save As..")
             alert.addButton(withTitle: "Cancel")
@@ -63,9 +60,7 @@ class Document: NSDocument {
             
             // Would prefer a sheet, but don't know which window it is.
             let result = alert.runModal()
-            if alert.suppressionButton?.state == .on {
-                defaults.set(true, forKey: alertSupressionKey)
-            }
+
             switch result {
             case NSApplication.ModalResponse.alertFirstButtonReturn:
                 super.save(Any?.self)
@@ -84,6 +79,49 @@ class Document: NSDocument {
     // Save as a PDF. Options will come later. (Allowing Quartz Filters, metadata)
     override func write(to url: URL, ofType typeName: String) throws {
         thePDFDocument?.write(to: url, withOptions: nil)
+    }
+    
+    
+
+    override func updateChangeCount(_ change: NSDocument.ChangeType) {
+        super.updateChangeCount(change)
+    }
+    
+    // PRINTING
+    // Make sure our page is centred on the paper, to avoid uneven margins.
+    // (This gives the best fit when duplexing.)
+    func thePrintInfo() -> NSPrintInfo {
+        let thePrintInfo = NSPrintInfo()
+        thePrintInfo.horizontalPagination = .fit
+        thePrintInfo.verticalPagination = .fit
+        thePrintInfo.isHorizontallyCentered = true
+        thePrintInfo.isVerticallyCentered = true
+        thePrintInfo.leftMargin = 0.0
+        thePrintInfo.rightMargin = 0.0
+        thePrintInfo.topMargin = 0.0
+        thePrintInfo.bottomMargin = 0.0
+        thePrintInfo.jobDisposition = .spool
+        return thePrintInfo
+    }
+    
+    // Add the Page Setup options to the Print Dialog
+    func thePrintPanel() -> NSPrintPanel {
+        let thePrintPanel = NSPrintPanel()
+        thePrintPanel.options = [
+            NSPrintPanel.Options.showsCopies,
+            NSPrintPanel.Options.showsPrintSelection,
+            NSPrintPanel.Options.showsPageSetupAccessory,
+            NSPrintPanel.Options.showsPreview
+        ]
+        return thePrintPanel
+    }
+    
+    override func printDocument(_ sender: Any?) {
+        if let printOperation = thePDFDocument?.printOperation(for: thePrintInfo(), scalingMode: .pageScaleNone, autoRotate: true){
+            printOperation.printPanel = thePrintPanel()
+            /// Would prefer to use .runModal but don't know what the window is.
+            printOperation.run()
+        }
     }
     
 
