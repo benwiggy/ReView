@@ -72,7 +72,7 @@ class ViewController: NSViewController {
             let newRotation = existingRotation - 90
             selectedPage.rotation = newRotation
             document?.updateChangeCount(.changeDone)
-            self.viewDidAppear()
+            thePDFView.setNeedsDisplay(view.bounds)
         }
     }
     
@@ -82,7 +82,7 @@ class ViewController: NSViewController {
             let newRotation = existingRotation + 90
             selectedPage.rotation = newRotation
             document?.updateChangeCount(.changeDone)
-            self.viewDidAppear()
+            thePDFView.setNeedsDisplay(view.bounds)
         }
     }
     
@@ -103,7 +103,7 @@ class ViewController: NSViewController {
                         thePDFView!.document!.removePage(at: selectedPageNo!)
                         theThumbnailView.setNeedsDisplay(CGRect(x: 0, y: 0, width: 0, height: 0))
                         document?.updateChangeCount(.changeDone)
-                        self.viewDidAppear()
+                        thePDFView.setNeedsDisplay(view.bounds)
                     case NSApplication.ModalResponse.alertSecondButtonReturn:
                         break
                     default:
@@ -133,6 +133,7 @@ class ViewController: NSViewController {
     // OVERRIDES
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(handleDocumentReverted), name: .documentReverted, object: nil)
         // Do any additional setup after loading the view.
     }
     
@@ -154,6 +155,13 @@ class ViewController: NSViewController {
         // Update the view, if already loaded.
         }
     }
+    
+    @objc func handleDocumentReverted(_ note: Notification) {
+      let sendingDocument = note.object as? Document
+      guard sendingDocument == document else { return }
+      thePDFView.setNeedsDisplay(view.bounds)
+        NSLog("qwe")
+    }  
     
     /*
     func getOutlines: {

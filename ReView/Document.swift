@@ -9,6 +9,10 @@
 import Cocoa
 import Quartz
 
+extension Notification.Name {
+  static let documentReverted = Notification.Name(rawValue:"Revert!")
+}
+
 class Document: NSDocument {
     var thePDFDocument: PDFDocument?
 
@@ -17,10 +21,14 @@ class Document: NSDocument {
         // Add your subclass-specific initialization here.
 
     }
-
-    // NO! We do not want our precious originals overwritten!
+    
+     // NO! We do not want our precious originals overwritten!
     override class var autosavesInPlace: Bool {
         return false
+    }
+    
+    var viewController: ViewController? {
+        return windowControllers[0].contentViewController as? ViewController
     }
     
     override func makeWindowControllers() {
@@ -79,12 +87,22 @@ class Document: NSDocument {
     // Save as a PDF. Options will come later. (Allowing Quartz Filters, metadata)
     override func write(to url: URL, ofType typeName: String) throws {
         thePDFDocument?.write(to: url, withOptions: nil)
+       
     }
     
-    
-
-    override func updateChangeCount(_ change: NSDocument.ChangeType) {
-        super.updateChangeCount(change)
+  
+    override func revert(toContentsOf url: URL, ofType typeName: String) throws {
+      do {
+        let data = try Data(contentsOf: url)
+           try read(from: data, ofType:typeName)
+        try super.revert(toContentsOf: url, ofType: typeName)
+        NotificationCenter.default.post(name: .documentReverted, object: self)
+        NSLog("Revert!")
+        }
+        // try super.revert(toContentsOf: url, ofType: typeName)
+       // let docsview = viewController?.thePDFView
+      //  docsview?.setNeedsDisplay(docsview!.bounds)
+      // }
     }
     
     // PRINTING
