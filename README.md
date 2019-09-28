@@ -25,4 +25,7 @@ The first release of ReView does the following:
 * Deletes individual pages (with warning).
 * Saves documents when asked, if altered.
 
+#### Known problems:
+Revert to Save does not work correctly, and there is no Undo.
+
 
