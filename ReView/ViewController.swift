@@ -66,13 +66,26 @@ class ViewController: NSViewController {
     
     // FUNCTIONS THAT EDIT
     // TO DO: Make Undo function
+    
+    @IBAction func addBlank(_sender: Any?) {
+         if let selectedPage = thePDFView.currentPage {
+            let selectedPageNo: Int? = (thePDFView.document!.index(for: thePDFView.currentPage!))
+            let pageSize = selectedPage.bounds(for: .mediaBox)
+            let blankPage = PDFPage.init()
+            blankPage.setBounds(pageSize, for: .mediaBox)
+            thePDFView.document!.insert(blankPage, at: selectedPageNo!)
+            document?.updateChangeCount(.changeDone)
+            loadViewParameters()
+        }
+    }
+    
     @IBAction func rotateLeft(_sender: Any? ) {
         if let selectedPage = thePDFView.currentPage {
             let existingRotation = selectedPage.rotation
             let newRotation = existingRotation - 90
             selectedPage.rotation = newRotation
             document?.updateChangeCount(.changeDone)
-            thePDFView.setNeedsDisplay(view.bounds)
+            loadViewParameters()
         }
     }
     
@@ -82,7 +95,7 @@ class ViewController: NSViewController {
             let newRotation = existingRotation + 90
             selectedPage.rotation = newRotation
             document?.updateChangeCount(.changeDone)
-            thePDFView.setNeedsDisplay(view.bounds)
+            loadViewParameters()
         }
     }
     
@@ -101,9 +114,8 @@ class ViewController: NSViewController {
                     switch result {
                     case NSApplication.ModalResponse.alertFirstButtonReturn:
                         thePDFView!.document!.removePage(at: selectedPageNo!)
-                        theThumbnailView.setNeedsDisplay(CGRect(x: 0, y: 0, width: 0, height: 0))
                         document?.updateChangeCount(.changeDone)
-                        thePDFView.setNeedsDisplay(view.bounds)
+                        loadViewParameters()
                     case NSApplication.ModalResponse.alertSecondButtonReturn:
                         break
                     default:
@@ -132,23 +144,27 @@ class ViewController: NSViewController {
     
     // OVERRIDES
     override func viewDidLoad() {
-        super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(handleDocumentReverted), name: .documentReverted, object: nil)
         // Do any additional setup after loading the view.
     }
     
-    override func viewDidAppear() {
-        
-        let theThumbnailSize = CGSize(width: 200, height: 200)
+  func loadViewParameters()  {
         self.thePDFView?.document = document?.thePDFDocument
+        self.thePDFView.setNeedsDisplay(view.bounds)
+        self.theThumbnailView?.pdfView = nil
+        self.theThumbnailView?.pdfView = self.thePDFView
+        self.theThumbnailView.setNeedsDisplay(view.bounds)
+        
+    }
+    
+    override func viewWillAppear() {
+        let theThumbnailSize = CGSize(width: 200, height: 200)
         // self.thePDFView?.autoScales = true
         self.thePDFView?.displayMode = theDisplayMode
         self.thePDFView?.displaysAsBook = bookState
-
-        self.theThumbnailView?.pdfView = self.thePDFView
         self.theThumbnailView?.thumbnailSize = theThumbnailSize
+         loadViewParameters()
     }
-    
 
     override var representedObject: Any? {
         didSet {
@@ -159,8 +175,10 @@ class ViewController: NSViewController {
     @objc func handleDocumentReverted(_ note: Notification) {
       let sendingDocument = note.object as? Document
       guard sendingDocument == document else { return }
-      thePDFView.setNeedsDisplay(view.bounds)
-        NSLog("qwe")
+       loadViewParameters()
+      thePDFView.setNeedsDisplay(thePDFView.bounds)
+      theThumbnailView.setNeedsDisplay(theThumbnailView.bounds)
+       
     }  
     
     /*

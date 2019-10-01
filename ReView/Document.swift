@@ -58,13 +58,13 @@ class Document: NSDocument {
 
         switch self.isDocumentEdited {
         case false:
+         
             let alert = NSAlert()
             alert.messageText = "Save Document?"
             alert.informativeText = "Document has not been altered. \rSaving will 'rinse' the document through PDFKit."
             alert.addButton(withTitle: "OK")
             alert.addButton(withTitle: "Save As..")
             alert.addButton(withTitle: "Cancel")
-            alert.showsSuppressionButton = true
             
             // Would prefer a sheet, but don't know which window it is.
             let result = alert.runModal()
@@ -87,22 +87,15 @@ class Document: NSDocument {
     // Save as a PDF. Options will come later. (Allowing Quartz Filters, metadata)
     override func write(to url: URL, ofType typeName: String) throws {
         thePDFDocument?.write(to: url, withOptions: nil)
-       
     }
     
-  
     override func revert(toContentsOf url: URL, ofType typeName: String) throws {
       do {
         let data = try Data(contentsOf: url)
-           try read(from: data, ofType:typeName)
+        self.thePDFDocument = PDFDocument.init(data: data)
         try super.revert(toContentsOf: url, ofType: typeName)
         NotificationCenter.default.post(name: .documentReverted, object: self)
-        NSLog("Revert!")
         }
-        // try super.revert(toContentsOf: url, ofType: typeName)
-       // let docsview = viewController?.thePDFView
-      //  docsview?.setNeedsDisplay(docsview!.bounds)
-      // }
     }
     
     // PRINTING
@@ -141,8 +134,5 @@ class Document: NSDocument {
             printOperation.run()
         }
     }
-    
-
-    
 }
 
