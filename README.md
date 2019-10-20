@@ -17,17 +17,16 @@ Much of this is far beyond my abilities, so please feel free to contribute! Grat
 
 # Release Notes
 
-### 0.1
-Review is still very much in 'alpha' phase. The first release of ReView does the following:
+### 0.15
+Review is still very much in 'alpha' phase. The current release of ReView does the following:
 * Opens PDFs for Viewing as 1-up or 2-up (with first page on its own or not); Single or Continuous pages.
 * Rotate individual pages left or right
 * Prints using accurate page positioning for duplexing with enhanced print panel.
 * Deletes individual pages (with warning).
 * Adds blank pages
+* Applies Quartz Filter to PDF documents.
 * Saves documents when asked, if altered.
 
 #### Known problems:
-There is no Undo.  
-Page numbers in thumbnail view get confused after adding/deleting pages.
-
+There is no Undo. However, Revert to Saved works.
 
