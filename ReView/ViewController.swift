@@ -16,6 +16,7 @@ class ViewController: NSViewController {
     var document: Document? {
          return self.view.window?.windowController?.document as? Document
      }
+
     
     // These should be prefs
     var theDisplayMode: PDFDisplayMode! = .singlePageContinuous
@@ -75,7 +76,7 @@ class ViewController: NSViewController {
             blankPage.setBounds(pageSize, for: .mediaBox)
             thePDFView.document!.insert(blankPage, at: selectedPageNo!)
             document?.updateChangeCount(.changeDone)
-            loadViewParameters()
+            document!.rinse()
         }
     }
     
@@ -115,7 +116,7 @@ class ViewController: NSViewController {
                     case NSApplication.ModalResponse.alertFirstButtonReturn:
                         thePDFView!.document!.removePage(at: selectedPageNo!)
                         document?.updateChangeCount(.changeDone)
-                        loadViewParameters()
+                        document!.rinse()
                     case NSApplication.ModalResponse.alertSecondButtonReturn:
                         break
                     default:
@@ -141,20 +142,33 @@ class ViewController: NSViewController {
         }
     }
     
+    @IBAction func applyFilter(_sender: Any?) {
+        let storyboardName = NSStoryboard.Name(stringLiteral: "Main")
+        let storyboard = NSStoryboard(name: storyboardName, bundle: nil)
+        let storyboardID = NSStoryboard.SceneIdentifier(stringLiteral: "quartzPanelID")
+         
+        if let quartzWindowController = storyboard.instantiateController(withIdentifier: storyboardID) as? NSWindowController {
+        //    if let quartzPanelVC = quartzWindowController.contentViewController as? quartzPanelViewController {
+        
+                
+        //    }
+            quartzWindowController.showWindow(nil)
+        }
+    }
+    
     
     // OVERRIDES
     override func viewDidLoad() {
         NotificationCenter.default.addObserver(self, selector: #selector(handleDocumentReverted), name: .documentReverted, object: nil)
+
         // Do any additional setup after loading the view.
     }
     
   func loadViewParameters()  {
-        self.thePDFView?.document = document?.thePDFDocument
+        self.thePDFView.layoutDocumentView()
         self.thePDFView.setNeedsDisplay(view.bounds)
-        self.theThumbnailView?.pdfView = nil
-        self.theThumbnailView?.pdfView = self.thePDFView
+        self.theThumbnailView.pdfView = self.thePDFView
         self.theThumbnailView.setNeedsDisplay(view.bounds)
-        
     }
     
     override func viewWillAppear() {
@@ -163,6 +177,8 @@ class ViewController: NSViewController {
         self.thePDFView?.displayMode = theDisplayMode
         self.thePDFView?.displaysAsBook = bookState
         self.theThumbnailView?.thumbnailSize = theThumbnailSize
+        self.thePDFView?.document = document?.thePDFDocument
+        self.theThumbnailView.pdfView = self.thePDFView
          loadViewParameters()
     }
 
@@ -179,7 +195,7 @@ class ViewController: NSViewController {
       thePDFView.setNeedsDisplay(thePDFView.bounds)
       theThumbnailView.setNeedsDisplay(theThumbnailView.bounds)
        
-    }  
+    }
     
     /*
     func getOutlines: {

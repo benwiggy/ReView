@@ -19,7 +19,7 @@ class Document: NSDocument {
     override init() {
         super.init()
         // Add your subclass-specific initialization here.
-
+        NotificationCenter.default.addObserver(self, selector: #selector(handleFilterChoice), name: .filterSelected, object: nil)
     }
     
      // NO! We do not want our precious originals overwritten!
@@ -95,6 +95,7 @@ class Document: NSDocument {
         self.thePDFDocument = PDFDocument.init(data: data)
         try super.revert(toContentsOf: url, ofType: typeName)
         NotificationCenter.default.post(name: .documentReverted, object: self)
+        viewController?.viewWillAppear()
         }
     }
     
@@ -130,9 +131,27 @@ class Document: NSDocument {
     override func printDocument(_ sender: Any?) {
         if let printOperation = thePDFDocument?.printOperation(for: thePrintInfo(), scalingMode: .pageScaleNone, autoRotate: true){
             printOperation.printPanel = thePrintPanel()
-            /// Would prefer to use .runModal but don't know what the window is.
+            // Would prefer to use .runModal but don't know what the window is.
             printOperation.run()
         }
     }
+    
+    @objc func handleFilterChoice(_ note: Notification) {
+        let filterpath = note.userInfo!["url"] as! URL
+        let value = QuartzFilter(url: filterpath)
+        let dict = [ "QuartzFilter" : value ]
+            if let pdfData = thePDFDocument?.dataRepresentation(options: dict as Any as! [AnyHashable : Any]) {
+            thePDFDocument = PDFDocument.init(data: pdfData)
+                viewController?.viewWillAppear()
+    }
+    }
+    
+    // PDFDocument has to be rinsed through NSData and back in to
+    // update page numbers and redisplay Quartz Filter effects, etc.
+    // Ideally want to have options dict as an argument. (See handleFilterChoice)
+    func rinse() {
+        let pdfData = thePDFDocument?.dataRepresentation()
+        thePDFDocument = PDFDocument.init(data: pdfData!)
+        viewController?.viewWillAppear()
+    }
 }
-
