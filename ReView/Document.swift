@@ -36,6 +36,9 @@ class Document: NSDocument {
         let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
         let windowController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier("Document Window Controller")) as! NSWindowController
         self.addWindowController(windowController)
+        if let viewController = windowController.contentViewController as! ViewController? {
+            viewController.representedObject = self
+        }
        // windowController.window?.titleVisibility = .hidden
     }
 /*
@@ -135,6 +138,8 @@ class Document: NSDocument {
             printOperation.run()
         }
     }
+    
+
     
     @objc func handleFilterChoice(_ note: Notification) {
         let filterpath = note.userInfo!["url"] as! URL

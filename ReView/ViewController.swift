@@ -13,8 +13,10 @@ class ViewController: NSViewController {
     // SETUP
     @IBOutlet var thePDFView: PDFView!
     @IBOutlet var theThumbnailView: PDFThumbnailView!
+    
     var document: Document? {
-         return self.view.window?.windowController?.document as? Document
+         //return self.view.window?.windowController?.document as? Document
+        return self.representedObject as? Document
      }
 
     
@@ -23,9 +25,8 @@ class ViewController: NSViewController {
     var bookState: Bool = true
     let defaults = UserDefaults.standard
     
-    @IBOutlet var theTabView: NSTabView!
-    @IBOutlet var PageView: NSTabViewItem!
-    @IBOutlet var ToCTab: NSTabViewItem!
+    
+    
     
     // View menu commands
     @IBAction func singlePage(_ sender: NSMenuItem) {
@@ -69,32 +70,38 @@ class ViewController: NSViewController {
     // TO DO: Make Undo function
     
     @IBAction func addBlank(_sender: Any?) {
-         if let selectedPage = thePDFView.currentPage {
-            let selectedPageNo: Int? = (thePDFView.document!.index(for: thePDFView.currentPage!))
-            let pageSize = selectedPage.bounds(for: .mediaBox)
+        if let selectedPages = theThumbnailView.selectedPages {
+            // let selectedPageNo: Int? = (thePDFView.document!.index(for: thePDFView.currentPage!))
+            for page in selectedPages {
+            let pageSize = page.bounds(for: .mediaBox)
             let blankPage = PDFPage.init()
             blankPage.setBounds(pageSize, for: .mediaBox)
-            thePDFView.document!.insert(blankPage, at: selectedPageNo!)
+                document!.thePDFDocument!.insert(blankPage, at: ((document!.thePDFDocument!.index(for: page))))
+            }
             document?.updateChangeCount(.changeDone)
             document!.rinse()
         }
     }
     
     @IBAction func rotateLeft(_sender: Any? ) {
-        if let selectedPage = thePDFView.currentPage {
-            let existingRotation = selectedPage.rotation
-            let newRotation = existingRotation - 90
-            selectedPage.rotation = newRotation
+        if let selectedPages = theThumbnailView.selectedPages {
+            for page in selectedPages {
+                let existingRotation = page.rotation
+                let newRotation = existingRotation - 90
+                page.rotation = newRotation
+                }
             document?.updateChangeCount(.changeDone)
             loadViewParameters()
         }
     }
     
     @IBAction func rotateRight(_sender: Any? ) {
-        if let selectedPage = thePDFView.currentPage {
-            let existingRotation = selectedPage.rotation
+        if let selectedPages = theThumbnailView.selectedPages {
+        for page in selectedPages {
+            let existingRotation = page.rotation
             let newRotation = existingRotation + 90
-            selectedPage.rotation = newRotation
+            page.rotation = newRotation
+            }
             document?.updateChangeCount(.changeDone)
             loadViewParameters()
         }
@@ -103,9 +110,11 @@ class ViewController: NSViewController {
     @IBAction func deletePage(_sender: Any?) {
         if let pageCount = thePDFView.document?.pageCount {
             if pageCount > 1 {
-                if thePDFView!.currentPage != nil {
+                if let selectedPages = theThumbnailView.selectedPages {
+                for page in selectedPages {
+                
                 let selectedPageNo: Int? = (thePDFView.document!.index(for: thePDFView.currentPage!))
-                if (selectedPageNo != nil)  {
+              
                     let alert = NSAlert()
                     alert.messageText = "Delete Page"
                     alert.informativeText = ("Do you want to delete page " + String(selectedPageNo!+1) + "?")
@@ -121,8 +130,8 @@ class ViewController: NSViewController {
                         break
                     default:
                         break
-                    }
-                        
+                        }
+
                     }
                 } else {
                     let alert = NSAlert()
@@ -131,7 +140,8 @@ class ViewController: NSViewController {
                     alert.addButton(withTitle: "OK")
                     alert.runModal()
                     }
-            
+                    
+                
             } else {
                 let alert = NSAlert()
                 alert.messageText = "Only One Page"
@@ -143,6 +153,7 @@ class ViewController: NSViewController {
     }
     
     @IBAction func applyFilter(_sender: Any?) {
+    
         let storyboardName = NSStoryboard.Name(stringLiteral: "Main")
         let storyboard = NSStoryboard(name: storyboardName, bundle: nil)
         let storyboardID = NSStoryboard.SceneIdentifier(stringLiteral: "quartzPanelID")
@@ -160,31 +171,33 @@ class ViewController: NSViewController {
     // OVERRIDES
     override func viewDidLoad() {
         NotificationCenter.default.addObserver(self, selector: #selector(handleDocumentReverted), name: .documentReverted, object: nil)
-
+        self.theThumbnailView.maximumNumberOfColumns = 1
+        self.theThumbnailView.allowsMultipleSelection = true
+        let theThumbnailSize = CGSize(width: 200, height: 200)
+        self.thePDFView?.displayMode = theDisplayMode
+        self.thePDFView?.displaysAsBook = bookState
+        self.theThumbnailView?.thumbnailSize = theThumbnailSize
         // Do any additional setup after loading the view.
     }
     
   func loadViewParameters()  {
+    self.thePDFView?.document = document?.thePDFDocument
         self.thePDFView.layoutDocumentView()
         self.thePDFView.setNeedsDisplay(view.bounds)
         self.theThumbnailView.pdfView = self.thePDFView
         self.theThumbnailView.setNeedsDisplay(view.bounds)
+    // "Go to same page" reselects the page in thumbnail
+    self.thePDFView.goToNextPage(Any?.self)
+    self.thePDFView.goToPreviousPage(Any?.self)
     }
     
     override func viewWillAppear() {
-        let theThumbnailSize = CGSize(width: 200, height: 200)
-        // self.thePDFView?.autoScales = true
-        self.thePDFView?.displayMode = theDisplayMode
-        self.thePDFView?.displaysAsBook = bookState
-        self.theThumbnailView?.thumbnailSize = theThumbnailSize
-        self.thePDFView?.document = document?.thePDFDocument
-        self.theThumbnailView.pdfView = self.thePDFView
          loadViewParameters()
     }
 
     override var representedObject: Any? {
         didSet {
-        // Update the view, if already loaded.
+        loadViewParameters()
         }
     }
     
@@ -199,7 +212,6 @@ class ViewController: NSViewController {
     
     /*
     func getOutlines: {
-        let document = self.view.window?.windowController?.document as! Document
         // let theOutline = PDFOutline.init()
         let theOutline = document.thePDFDocument?.outlineRoot
     }
