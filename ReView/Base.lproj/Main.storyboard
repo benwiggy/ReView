@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15400"/>
-        <plugIn identifier="com.apple.pdfkit.ibplugin" version="15400"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23727"/>
+        <plugIn identifier="com.apple.pdfkit.ibplugin" version="23727"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -386,9 +386,6 @@ CA
                                             <connections>
                                                 <action selector="applyFilterWith_sender:" target="Ady-hI-5gd" id="kJo-zI-Qov"/>
                                             </connections>
-                                        </menuItem>
-                                        <menuItem title="Item 3" id="oLq-P6-0sG">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
                                         </menuItem>
                                     </items>
                                 </menu>
@@ -804,14 +801,14 @@ CA
                         <rect key="frame" x="0.0" y="0.0" width="250" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView canDrawConcurrently="YES" fixedFrame="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E9S-P7-qFZ">
+                            <scrollView fixedFrame="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E9S-P7-qFZ">
                                 <rect key="frame" x="0.0" y="0.0" width="250" height="544"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <clipView key="contentView" ambiguous="YES" id="Yv4-nA-Oyn">
+                                <clipView key="contentView" id="Yv4-nA-Oyn">
                                     <rect key="frame" x="0.0" y="0.0" width="250" height="544"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <outlineView verticalHuggingPriority="750" ambiguous="YES" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="41x-k8-evN" viewBased="YES" indentationPerLevel="16" outlineTableColumn="Oes-OD-7lZ" id="ZHj-4f-jon">
+                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="41x-k8-evN" viewBased="YES" indentationPerLevel="16" outlineTableColumn="Oes-OD-7lZ" id="ZHj-4f-jon">
                                             <rect key="frame" x="0.0" y="0.0" width="250" height="519"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
@@ -820,7 +817,6 @@ CA
                                             <tableColumns>
                                                 <tableColumn width="116" minWidth="40" maxWidth="1000" id="Oes-OD-7lZ">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -832,11 +828,11 @@ CA
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="knC-Cl-Na9">
-                                                            <rect key="frame" x="1" y="1" width="116" height="17"/>
+                                                            <rect key="frame" x="11" y="1" width="121" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lck-BT-QaY">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="116" height="17"/>
+                                                                <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lck-BT-QaY">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="121" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="Yec-Mc-cJi">
                                                                         <font key="font" metaFont="system"/>
@@ -851,9 +847,8 @@ CA
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn width="128" minWidth="40" maxWidth="1000" id="i1l-hx-qHB">
+                                                <tableColumn width="99" minWidth="40" maxWidth="1000" id="i1l-hx-qHB">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -865,11 +860,11 @@ CA
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="48w-vU-FUG">
-                                                            <rect key="frame" x="120" y="1" width="128" height="17"/>
+                                                            <rect key="frame" x="135" y="1" width="103" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qDD-iW-NhY">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="17"/>
+                                                                <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qDD-iW-NhY">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="103" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="nyp-zi-2db">
                                                                         <font key="font" metaFont="system"/>
@@ -896,7 +891,7 @@ CA
                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <tableHeaderView key="headerView" id="41x-k8-evN">
+                                <tableHeaderView key="headerView" wantsLayer="YES" id="41x-k8-evN">
                                     <rect key="frame" x="0.0" y="0.0" width="250" height="25"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
@@ -943,7 +938,7 @@ CA
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="zRb-an-Ypx" id="SaG-FD-EcZ">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
+                                    <font key="font" metaFont="message"/>
                                     <menu key="menu" id="Nu8-Pe-Slp">
                                         <items>
                                             <menuItem title="Item 1" state="on" id="zRb-an-Ypx"/>
@@ -995,12 +990,12 @@ DQ
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController storyboardIdentifier="Document Window Controller" id="jGA-0Y-lOj" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" tabbingMode="preferred" id="Ckk-yw-fiv">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="Ckk-yw-fiv">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES"/>
                         <rect key="contentRect" x="100" y="165" width="595" height="842"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
-                        <toolbar key="toolbar" implicitIdentifier="E3B866E9-E939-4BA8-BAB2-EAF3EA73AC53" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="small" id="bgb-eb-1bz">
+                        <toolbar key="toolbar" implicitIdentifier="E3B866E9-E939-4BA8-BAB2-EAF3EA73AC53" autosavesConfiguration="NO" showsBaselineSeparator="NO" displayMode="iconAndLabel" sizeMode="regular" id="bgb-eb-1bz">
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="qKU-qV-qBz">
                                     <connections>
@@ -1008,28 +1003,28 @@ DQ
                                     </connections>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="khY-yD-egj"/>
-                                <toolbarItem implicitItemIdentifier="F939ACA3-2310-42F1-8E94-77EA7E3F0E5D" label="Rotate Left" paletteLabel="Rotate Left" tag="-1" id="4dp-1j-PT3">
+                                <toolbarItem implicitItemIdentifier="F939ACA3-2310-42F1-8E94-77EA7E3F0E5D" label="Rotate Left" paletteLabel="Rotate Left" tag="-1" image="NSTouchBarRotateLeftTemplate" id="4dp-1j-PT3">
                                     <size key="minSize" width="4" height="14"/>
                                     <size key="maxSize" width="4" height="14"/>
                                     <connections>
                                         <action selector="rotateLeftWith_sender:" target="6f7-a7-6o1" id="oZ0-mW-Hr0"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="886FE3A1-6BE0-4307-9ABA-8C6B8FF7DA66" label="Rotate Right" paletteLabel="Rotate Right" tag="-1" id="CSM-AZ-V3X">
+                                <toolbarItem implicitItemIdentifier="886FE3A1-6BE0-4307-9ABA-8C6B8FF7DA66" label="Rotate Right" paletteLabel="Rotate Right" tag="-1" image="NSTouchBarRotateRightTemplate" id="CSM-AZ-V3X">
                                     <size key="minSize" width="4" height="14"/>
                                     <size key="maxSize" width="4" height="14"/>
                                     <connections>
                                         <action selector="rotateRightWith_sender:" target="6f7-a7-6o1" id="3Rs-kA-bll"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="3308A722-B3F5-485B-BC04-3728E6DE0A40" label="Add Page" paletteLabel="Add Page" tag="-1" id="8Y5-xP-tJa">
+                                <toolbarItem implicitItemIdentifier="3308A722-B3F5-485B-BC04-3728E6DE0A40" label="Add Page" paletteLabel="Add Page" tag="-1" image="NSAddTemplate" id="8Y5-xP-tJa">
                                     <size key="minSize" width="4" height="14"/>
                                     <size key="maxSize" width="4" height="14"/>
                                     <connections>
                                         <action selector="addBlankWith_sender:" target="6f7-a7-6o1" id="bnm-qN-hAC"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="98EC409C-2352-472C-936E-F6E25CA48E80" label="Delete Page" paletteLabel="Delete Page" tag="-1" id="FPe-Y4-LjK">
+                                <toolbarItem implicitItemIdentifier="98EC409C-2352-472C-936E-F6E25CA48E80" label="Delete Page" paletteLabel="Delete Page" tag="-1" image="NSStopProgressFreestandingTemplate" id="FPe-Y4-LjK">
                                     <size key="minSize" width="4" height="14"/>
                                     <size key="maxSize" width="4" height="14"/>
                                     <connections>
@@ -1039,9 +1034,9 @@ DQ
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="kvJ-Pv-o54"/>
                                 <toolbarItem implicitItemIdentifier="863397C0-6DC1-4B68-8DE2-51567380B52C" label="" paletteLabel="" sizingBehavior="auto" id="qdS-CY-Yl8">
                                     <nil key="toolTip"/>
-                                    <searchField key="view" wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" id="1T0-2Q-xT3">
+                                    <searchField key="view" wantsLayer="YES" focusRingType="none" verticalHuggingPriority="750" textCompletion="NO" id="1T0-2Q-xT3">
                                         <rect key="frame" x="0.0" y="14" width="150" height="22"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="zSo-aE-svq">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -1085,12 +1080,12 @@ DQ
                             <splitView arrangesAllSubviews="NO" dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bff-KZ-cjM">
                                 <rect key="frame" x="0.0" y="0.0" width="1013" height="869"/>
                                 <subviews>
-                                    <customView id="ret-Ke-fJb">
+                                    <customView misplaced="YES" id="ret-Ke-fJb">
                                         <rect key="frame" x="0.0" y="0.0" width="150" height="869"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
-                                            <pdfThumbnailView wantsLayer="YES" canDrawConcurrently="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QuC-JU-lay">
-                                                <rect key="frame" x="0.0" y="0.0" width="150" height="869"/>
+                                            <pdfThumbnailView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QuC-JU-lay">
+                                                <rect key="frame" x="0.0" y="0.0" width="149" height="869"/>
                                                 <size key="thumbnailSize" width="200" height="200"/>
                                             </pdfThumbnailView>
                                         </subviews>
@@ -1131,18 +1126,18 @@ DQ
                     </connections>
                 </viewController>
                 <customObject id="2Tp-Fl-jBw" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <toolbar implicitIdentifier="09D11707-F4A3-4FD5-970E-AC5832E91C2B" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="4Yq-h4-ssk">
+                <toolbar implicitIdentifier="09D11707-F4A3-4FD5-970E-AC5832E91C2B" autosavesConfiguration="NO" showsBaselineSeparator="NO" displayMode="iconAndLabel" sizeMode="regular" id="4Yq-h4-ssk">
                     <allowedToolbarItems>
                         <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="iQt-Wc-fNg"/>
                         <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="LeM-0n-NcY"/>
                         <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="7WG-hd-ehx"/>
                         <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="m9y-0x-GGf"/>
                         <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="BFd-Nq-VO1"/>
-                        <toolbarItem implicitItemIdentifier="C7A610A2-2B2F-47B5-9B86-616DD2458078" label="Custom View" paletteLabel="Custom View" sizingBehavior="auto" id="OmV-v3-qwB">
+                        <toolbarItem implicitItemIdentifier="C7A610A2-2B2F-47B5-9B86-616DD2458078" label="Custom View" paletteLabel="Custom View" title="Button" sizingBehavior="auto" id="OmV-v3-qwB">
                             <nil key="toolTip"/>
                             <button key="view" verticalHuggingPriority="750" id="tmT-hs-AcZ">
-                                <rect key="frame" x="0.0" y="14" width="82" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <rect key="frame" x="1" y="14" width="75" height="32"/>
+                                <autoresizingMask key="autoresizingMask"/>
                                 <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="KEx-AF-6y2">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -1161,4 +1156,10 @@ DQ
             <point key="canvasLocation" x="279.5" y="1180.5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="NSAddTemplate" width="18" height="17"/>
+        <image name="NSStopProgressFreestandingTemplate" width="20" height="20"/>
+        <image name="NSTouchBarRotateLeftTemplate" width="19" height="21"/>
+        <image name="NSTouchBarRotateRightTemplate" width="19" height="21"/>
+    </resources>
 </document>

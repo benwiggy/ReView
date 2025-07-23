@@ -14,7 +14,7 @@ class ViewController: NSViewController {
     @IBOutlet var thePDFView: PDFView!
     @IBOutlet var theThumbnailView: PDFThumbnailView!
     
-    var document: Document? {
+    var document: Document! {
          //return self.view.window?.windowController?.document as? Document
         return self.representedObject as? Document
      }
@@ -76,9 +76,8 @@ class ViewController: NSViewController {
             let pageSize = page.bounds(for: .mediaBox)
             let blankPage = PDFPage.init()
             blankPage.setBounds(pageSize, for: .mediaBox)
-                document!.thePDFDocument!.insert(blankPage, at: ((document!.thePDFDocument!.index(for: page))))
+                document.insert(blankPage: blankPage, at: ((document!.thePDFDocument!.index(for: page))))
             }
-            document?.updateChangeCount(.changeDone)
             document!.rinse()
         }
     }
@@ -88,9 +87,9 @@ class ViewController: NSViewController {
             for page in selectedPages {
                 let existingRotation = page.rotation
                 let newRotation = existingRotation - 90
-                page.rotation = newRotation
+                let pageIndex = (page.document!.index(for: page))
+                document.setRotation(newRotation, forPageAt: pageIndex)
                 }
-            document?.updateChangeCount(.changeDone)
             loadViewParameters()
         }
     }
@@ -100,9 +99,9 @@ class ViewController: NSViewController {
         for page in selectedPages {
             let existingRotation = page.rotation
             let newRotation = existingRotation + 90
-            page.rotation = newRotation
+            let pageIndex = (page.document!.index(for: page))
+            document.setRotation(newRotation, forPageAt: pageIndex)
             }
-            document?.updateChangeCount(.changeDone)
             loadViewParameters()
         }
     }
@@ -123,9 +122,7 @@ class ViewController: NSViewController {
                     let result = alert.runModal()
                     switch result {
                     case NSApplication.ModalResponse.alertFirstButtonReturn:
-                        thePDFView!.document!.removePage(at: selectedPageNo!)
-                        document?.updateChangeCount(.changeDone)
-                        document!.rinse()
+                        document.deletePage(at: selectedPageNo!)
                     case NSApplication.ModalResponse.alertSecondButtonReturn:
                         break
                     default:
@@ -145,7 +142,7 @@ class ViewController: NSViewController {
             } else {
                 let alert = NSAlert()
                 alert.messageText = "Only One Page"
-                alert.informativeText = "ReView cannot delete the only page."
+                alert.informativeText = "ReView will not delete the only page."
                 alert.addButton(withTitle: "OK")
                 alert.runModal()
             }
@@ -176,6 +173,12 @@ class ViewController: NSViewController {
         let theThumbnailSize = CGSize(width: 200, height: 200)
         self.thePDFView?.displayMode = theDisplayMode
         self.thePDFView?.displaysAsBook = bookState
+        if #available(OSX 10.13, *) {
+             self.thePDFView.acceptsDraggedFiles = true
+            self.theThumbnailView.allowsDragging = true
+         } else {
+             self.thePDFView.allowsDragging = true
+         }
         self.theThumbnailView?.thumbnailSize = theThumbnailSize
         // Do any additional setup after loading the view.
     }

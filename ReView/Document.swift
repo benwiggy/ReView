@@ -14,12 +14,12 @@ extension Notification.Name {
 }
 
 class Document: NSDocument {
-    var thePDFDocument: PDFDocument?
+    var thePDFDocument: PDFDocument!
 
     override init() {
         super.init()
         // Add your subclass-specific initialization here.
-        NotificationCenter.default.addObserver(self, selector: #selector(handleFilterChoice), name: .filterSelected, object: nil)
+      //  NotificationCenter.default.addObserver(self, selector: #selector(handleFilterChoice), name: .filterSelected, object: nil)
     }
     
      // NO! We do not want our precious originals overwritten!
@@ -35,6 +35,7 @@ class Document: NSDocument {
         // Returns the Storyboard that contains your Document window.
         let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
         let windowController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier("Document Window Controller")) as! NSWindowController
+        windowController.shouldCascadeWindows = true
         self.addWindowController(windowController)
         if let viewController = windowController.contentViewController as! ViewController? {
             viewController.representedObject = self
@@ -102,6 +103,7 @@ class Document: NSDocument {
         }
     }
     
+    
     // PRINTING
     // Make sure our page is centred on the paper, to avoid uneven margins.
     // (This gives the best fit when duplexing.)
@@ -132,20 +134,19 @@ class Document: NSDocument {
     }
     
     override func printDocument(_ sender: Any?) {
-        if let printOperation = thePDFDocument?.printOperation(for: thePrintInfo(), scalingMode: .pageScaleNone, autoRotate: true){
+        if let printOperation = thePDFDocument.printOperation(for: thePrintInfo(), scalingMode: .pageScaleNone, autoRotate: true){
             printOperation.printPanel = thePrintPanel()
             // Would prefer to use .runModal but don't know what the window is.
             printOperation.run()
         }
     }
     
-
     
     @objc func handleFilterChoice(_ note: Notification) {
         let filterpath = note.userInfo!["url"] as! URL
         let value = QuartzFilter(url: filterpath)
         let dict = [ "QuartzFilter" : value ]
-            if let pdfData = thePDFDocument?.dataRepresentation(options: dict as Any as! [AnyHashable : Any]) {
+            if let pdfData = thePDFDocument.dataRepresentation(options: dict as Any as! [AnyHashable : Any]) {
             thePDFDocument = PDFDocument.init(data: pdfData)
                 viewController?.viewWillAppear()
     }
@@ -159,4 +160,43 @@ class Document: NSDocument {
         thePDFDocument = PDFDocument.init(data: pdfData!)
         viewController?.viewWillAppear()
     }
+    
+    func setRotation(_ rotation: Int, forPageAt index: Int) {
+        guard let page = thePDFDocument.page(at: index) else { return }
+        let oldRotation = page.rotation
+        page.rotation = rotation
+        registerUndoForRotation(page: page, oldRotation: oldRotation, newRotation: rotation)
+    }
+    
+    private func registerUndoForRotation(page: PDFPage, oldRotation: Int, newRotation: Int) {
+        viewController?.undoManager?.registerUndo(withTarget: self) { target in
+            target.setRotation(oldRotation, forPageAt: self.thePDFDocument.index(for: page))
+        }
+    }
+    
+    func insert(blankPage: PDFPage, at index: Int) {
+        thePDFDocument.insert(blankPage, at: index)
+        registerUndoForInsert(page: blankPage, at: index)
+    }
+    
+    private func registerUndoForInsert(page: PDFPage, at index: Int) {
+        viewController?.undoManager?.registerUndo(withTarget: self) { target in
+            self.thePDFDocument.removePage(at: index)
+        }
+    }
+    
+    
+    func deletePage(at index: Int) {
+        guard let page = thePDFDocument.page(at: index) else { return }
+        thePDFDocument.removePage(at: index)
+        registerUndoForRemove(page: page, at: index)
+    }
+    
+    private func registerUndoForRemove(page: PDFPage, at index: Int) {
+        viewController?.undoManager?.registerUndo(withTarget: self) { target in
+            self.thePDFDocument.insert(page, at: index)
+        }
+    }
+    
+    
 }
