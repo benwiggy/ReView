@@ -24,11 +24,11 @@ Review is still very much in 'alpha' phase. The current release of ReView does t
 * Prints using accurate page positioning for duplexing with enhanced print panel.
 * Deletes individual pages (with warning).
 * Adds blank pages
-* Applies Quartz Filter to PDF documents.
+* Applies Quartz Filters to PDF documents.
 * Saves documents when asked, if altered.
 
 Fixes:  
-* Undo now supported for page rotation and deletion.
+* Undo now supported for page rotation and deletion. (E.g. not for Quartz Filters.)
 * Window management improved.
 
 ### 0.15
