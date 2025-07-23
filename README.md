@@ -17,7 +17,7 @@ Much of this is far beyond my abilities, so please feel free to contribute! Grat
 
 # Release Notes
 
-### 0.15
+### 0.20
 Review is still very much in 'alpha' phase. The current release of ReView does the following:
 * Opens PDFs for Viewing as 1-up or 2-up (with first page on its own or not); Single or Continuous pages.
 * Rotate individual pages left or right
@@ -27,6 +27,15 @@ Review is still very much in 'alpha' phase. The current release of ReView does t
 * Applies Quartz Filter to PDF documents.
 * Saves documents when asked, if altered.
 
-#### Known problems:
-There is no Undo. However, Revert to Saved works.
+Fixes:  
+* Undo now supported for page rotation and deletion.
+* Window management improved.
+
+### 0.15
+Initial attempt.
+
+#### To Do List and Known problems:
+* Dragging thumbnails to change page order (doesn't work currently)
+* Editing and Viewing PDF Outlines (bookmarks) in sidebar.
+* Preferences and saved settings, e.g. View style.
 
