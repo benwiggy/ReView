@@ -19,7 +19,7 @@ class Document: NSDocument {
     override init() {
         super.init()
         // Add your subclass-specific initialization here.
-      //  NotificationCenter.default.addObserver(self, selector: #selector(handleFilterChoice), name: .filterSelected, object: nil)
+      NotificationCenter.default.addObserver(self, selector: #selector(handleFilterChoice), name: .filterSelected, object: nil)
     }
     
      // NO! We do not want our precious originals overwritten!
