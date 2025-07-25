@@ -13,7 +13,7 @@ MacOS has some incredibly powerful and flexible APIs for viewing, printing and c
 
 5. Improved AppleScript support. Preview has only recently included any AppleScript support, and most of it is 'generic'. It would be good to include exporting to other formats.
 
-Much of this is far beyond my abilities, so please feel free to contribute! Grateful Acknowledgement is made to Howard Oakley, who provided the basic code to get the app up and running.
+Much of this is far beyond my abilities, so please feel free to contribute! Grateful Acknowledgement is made to Howard Oakley, who provided the basic app template.
 
 # Release Notes
 
