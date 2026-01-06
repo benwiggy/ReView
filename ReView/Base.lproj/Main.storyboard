@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="24506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23727"/>
-        <plugIn identifier="com.apple.pdfkit.ibplugin" version="23727"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24506"/>
+        <plugIn identifier="com.apple.pdfkit.ibplugin" version="24506"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -186,7 +186,7 @@
                                                 <items>
                                                     <menuItem title="Find…" tag="1" keyEquivalent="f" id="Xz5-n4-O0W">
                                                         <connections>
-                                                            <action selector="performFindPanelAction:" target="Ady-hI-5gd" id="cD7-Qs-BN4"/>
+                                                            <action selector="search2:" target="Ady-hI-5gd" id="abR-n1-SUH"/>
                                                         </connections>
                                                     </menuItem>
                                                     <menuItem title="Find and Replace…" tag="12" keyEquivalent="f" id="YEy-JH-Tfz">
@@ -197,12 +197,12 @@
                                                     </menuItem>
                                                     <menuItem title="Find Next" tag="2" keyEquivalent="g" id="q09-fT-Sye">
                                                         <connections>
-                                                            <action selector="performFindPanelAction:" target="Ady-hI-5gd" id="NDo-RZ-v9R"/>
+                                                            <action selector="goToNextSearchResult:" target="Ady-hI-5gd" id="mz1-JB-oJ8"/>
                                                         </connections>
                                                     </menuItem>
                                                     <menuItem title="Find Previous" tag="3" keyEquivalent="G" id="OwM-mh-QMV">
                                                         <connections>
-                                                            <action selector="performFindPanelAction:" target="Ady-hI-5gd" id="HOh-sY-3ay"/>
+                                                            <action selector="goToPreviousSearchResult:" target="Ady-hI-5gd" id="b8x-WU-gZW"/>
                                                         </connections>
                                                     </menuItem>
                                                     <menuItem title="Use Selection for Find" tag="7" keyEquivalent="e" id="buJ-ug-pKt">
@@ -675,23 +675,23 @@ CA
                                         <menuItem title="Single Page" keyEquivalent="1" id="uYF-MD-7KF">
                                             <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                             <connections>
-                                                <action selector="singlePage:" target="Ady-hI-5gd" id="jsj-Vc-Sqh"/>
+                                                <action selector="changePageStyle:" target="Ady-hI-5gd" id="w2q-xo-Klz"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Single Page Continuous" keyEquivalent="1" id="yDG-Q9-bGx">
+                                        <menuItem title="Single Page Continuous" tag="1" keyEquivalent="1" id="yDG-Q9-bGx">
                                             <connections>
-                                                <action selector="singleCont:" target="Ady-hI-5gd" id="cwR-3r-v2I"/>
+                                                <action selector="changePageStyle:" target="Ady-hI-5gd" id="K2s-mB-FyZ"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Two Pages" keyEquivalent="2" id="wEB-gi-IFJ">
+                                        <menuItem title="Two Pages" tag="2" keyEquivalent="2" id="wEB-gi-IFJ">
                                             <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                             <connections>
-                                                <action selector="TwoPages:" target="Ady-hI-5gd" id="pov-NO-4fv"/>
+                                                <action selector="changePageStyle:" target="Ady-hI-5gd" id="Cp2-CR-KBa"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Two Pages Continuous" keyEquivalent="2" id="BSf-CQ-tOM">
+                                        <menuItem title="Two Pages Continuous" tag="3" keyEquivalent="2" id="BSf-CQ-tOM">
                                             <connections>
-                                                <action selector="TwoCont:" target="Ady-hI-5gd" id="Vp9-87-t2m"/>
+                                                <action selector="changePageStyle:" target="Ady-hI-5gd" id="b5g-RG-Ze8"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="6Qn-xp-2mq"/>
@@ -1042,7 +1042,13 @@ DQ
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </searchFieldCell>
+                                        <connections>
+                                            <action selector="search:" target="6f7-a7-6o1" id="rCp-Ab-4pj"/>
+                                        </connections>
                                     </searchField>
+                                    <connections>
+                                        <action selector="search2:" target="6f7-a7-6o1" id="uWo-xh-xTZ"/>
+                                    </connections>
                                 </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
@@ -1080,12 +1086,12 @@ DQ
                             <splitView arrangesAllSubviews="NO" dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bff-KZ-cjM">
                                 <rect key="frame" x="0.0" y="0.0" width="1013" height="869"/>
                                 <subviews>
-                                    <customView misplaced="YES" id="ret-Ke-fJb">
+                                    <customView id="ret-Ke-fJb">
                                         <rect key="frame" x="0.0" y="0.0" width="150" height="869"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <pdfThumbnailView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QuC-JU-lay">
-                                                <rect key="frame" x="0.0" y="0.0" width="149" height="869"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="150" height="869"/>
                                                 <size key="thumbnailSize" width="200" height="200"/>
                                             </pdfThumbnailView>
                                         </subviews>
