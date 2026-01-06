@@ -22,6 +22,10 @@ class Document: NSDocument {
       NotificationCenter.default.addObserver(self, selector: #selector(handleFilterChoice), name: .filterSelected, object: nil)
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
      // NO! We do not want our precious originals overwritten!
     override class var autosavesInPlace: Bool {
         return false
@@ -101,6 +105,11 @@ class Document: NSDocument {
         NotificationCenter.default.post(name: .documentReverted, object: self)
         viewController?.viewWillAppear()
         }
+    }
+    
+    override func close() {
+        thePDFDocument = nil
+        super.close()
     }
     
     
