@@ -17,6 +17,9 @@ Much of this is far beyond my abilities, so please feel free to contribute! Grat
 
 # Release Notes
 
+### 0.22
+* Text search function added.
+
 ### 0.20
 Review is still very much in 'alpha' phase. The current release of ReView does the following:
 * Opens PDFs for Viewing as 1-up or 2-up (with first page on its own or not); Single or Continuous pages.
