@@ -186,7 +186,7 @@
                                                 <items>
                                                     <menuItem title="Find…" tag="1" keyEquivalent="f" id="Xz5-n4-O0W">
                                                         <connections>
-                                                            <action selector="search2:" target="Ady-hI-5gd" id="abR-n1-SUH"/>
+                                                            <action selector="find:" target="Ady-hI-5gd" id="YwK-dg-AhB"/>
                                                         </connections>
                                                     </menuItem>
                                                     <menuItem title="Find and Replace…" tag="12" keyEquivalent="f" id="YEy-JH-Tfz">
@@ -1037,14 +1037,14 @@ DQ
                                     <searchField key="view" wantsLayer="YES" focusRingType="none" verticalHuggingPriority="750" textCompletion="NO" id="1T0-2Q-xT3">
                                         <rect key="frame" x="0.0" y="14" width="150" height="22"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="zSo-aE-svq">
+                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="zSo-aE-svq">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <connections>
+                                                <action selector="search2:" target="6f7-a7-6o1" id="wds-FC-orq"/>
+                                            </connections>
                                         </searchFieldCell>
-                                        <connections>
-                                            <action selector="search:" target="6f7-a7-6o1" id="rCp-Ab-4pj"/>
-                                        </connections>
                                     </searchField>
                                     <connections>
                                         <action selector="search2:" target="6f7-a7-6o1" id="uWo-xh-xTZ"/>

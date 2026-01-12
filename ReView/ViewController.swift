@@ -246,12 +246,34 @@ class ViewController: NSViewController {
         currentSearchIndex = (currentSearchIndex - 1 + searchResults.count) % searchResults.count
         highlightCurrentSearchResult()
     }
+    
+    
+    @IBAction func find(_ sender: Any?) {
+        focusSearchField()
+    }
+    
+    // Highlight the search box
+    func focusSearchField() {
+        guard
+            let window = view.window,
+            let toolbar = window.toolbar
+        else { return }
+
+        for item in toolbar.items {
+            if let searchField = item.view as? NSSearchField {
+                window.makeFirstResponder(searchField)
+                break
+            }
+        }
+    }
+    
 
     
     
     // OVERRIDES
     override func viewDidLoad() {
         super.viewDidLoad()
+    
 
         // Register initial defaults (only used if keys don’t exist yet)
         defaults.register(defaults: [
@@ -306,6 +328,7 @@ class ViewController: NSViewController {
             thePDFView.allowsDragging = true
         }
         theThumbnailView?.thumbnailSize = theThumbnailSize
+        
     }
     
   func loadViewParameters()  {
@@ -322,6 +345,7 @@ class ViewController: NSViewController {
     
     override func viewWillAppear() {
          loadViewParameters()
+
     }
 
     override var representedObject: Any? {

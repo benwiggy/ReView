@@ -32,7 +32,7 @@ class Document: NSDocument {
     }
     
     var viewController: ViewController? {
-        return windowControllers[0].contentViewController as? ViewController
+        return windowControllers.first?.contentViewController as? ViewController
     }
     
     override func makeWindowControllers() {
