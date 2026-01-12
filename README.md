@@ -17,8 +17,9 @@ Much of this is far beyond my abilities, so please feel free to contribute! Grat
 
 # Release Notes
 
-### 0.22
+### 0.23
 * Text search function added.
+* Fix to prevent documents being 'held open', causing trouble with Time Machine.
 
 ### 0.20
 Review is still very much in 'alpha' phase. The current release of ReView does the following:
