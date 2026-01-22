@@ -997,45 +997,42 @@ DQ
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <toolbar key="toolbar" implicitIdentifier="E3B866E9-E939-4BA8-BAB2-EAF3EA73AC53" autosavesConfiguration="NO" showsBaselineSeparator="NO" displayMode="iconAndLabel" sizeMode="regular" id="bgb-eb-1bz">
                             <allowedToolbarItems>
+                                <toolbarItem implicitItemIdentifier="47C5A97B-D0EE-42DA-825D-1EA5219AB6D3" label="Thumbnails" paletteLabel="Thumbnails" tag="-1" image="NSTouchBarSidebarTemplate" bordered="YES" sizingBehavior="auto" id="kij-yI-Xp8">
+                                    <connections>
+                                        <action selector="sidebar:" target="6f7-a7-6o1" id="SaY-i4-SAx"/>
+                                    </connections>
+                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="qKU-qV-qBz">
                                     <connections>
                                         <action selector="printDocument:" target="6f7-a7-6o1" id="dTv-Sv-9Fw"/>
                                     </connections>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="khY-yD-egj"/>
-                                <toolbarItem implicitItemIdentifier="F939ACA3-2310-42F1-8E94-77EA7E3F0E5D" label="Rotate Left" paletteLabel="Rotate Left" tag="-1" image="NSTouchBarRotateLeftTemplate" id="4dp-1j-PT3">
-                                    <size key="minSize" width="4" height="14"/>
-                                    <size key="maxSize" width="4" height="14"/>
+                                <toolbarItem implicitItemIdentifier="F939ACA3-2310-42F1-8E94-77EA7E3F0E5D" label="Rotate Left" paletteLabel="Rotate Left" tag="-1" image="NSTouchBarRotateLeftTemplate" sizingBehavior="auto" id="4dp-1j-PT3">
                                     <connections>
                                         <action selector="rotateLeftWith_sender:" target="6f7-a7-6o1" id="oZ0-mW-Hr0"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="886FE3A1-6BE0-4307-9ABA-8C6B8FF7DA66" label="Rotate Right" paletteLabel="Rotate Right" tag="-1" image="NSTouchBarRotateRightTemplate" id="CSM-AZ-V3X">
-                                    <size key="minSize" width="4" height="14"/>
-                                    <size key="maxSize" width="4" height="14"/>
+                                <toolbarItem implicitItemIdentifier="886FE3A1-6BE0-4307-9ABA-8C6B8FF7DA66" label="Rotate Right" paletteLabel="Rotate Right" tag="-1" image="NSTouchBarRotateRightTemplate" sizingBehavior="auto" id="CSM-AZ-V3X">
                                     <connections>
                                         <action selector="rotateRightWith_sender:" target="6f7-a7-6o1" id="3Rs-kA-bll"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="3308A722-B3F5-485B-BC04-3728E6DE0A40" label="Add Page" paletteLabel="Add Page" tag="-1" image="NSAddTemplate" id="8Y5-xP-tJa">
-                                    <size key="minSize" width="4" height="14"/>
-                                    <size key="maxSize" width="4" height="14"/>
+                                <toolbarItem implicitItemIdentifier="3308A722-B3F5-485B-BC04-3728E6DE0A40" label="Add Page" paletteLabel="Add Page" tag="-1" image="NSAddTemplate" sizingBehavior="auto" id="8Y5-xP-tJa">
                                     <connections>
-                                        <action selector="addBlankWith_sender:" target="6f7-a7-6o1" id="bnm-qN-hAC"/>
+                                        <action selector="addBlank:" target="6f7-a7-6o1" id="om9-n0-xOa"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="98EC409C-2352-472C-936E-F6E25CA48E80" label="Delete Page" paletteLabel="Delete Page" tag="-1" image="NSStopProgressFreestandingTemplate" id="FPe-Y4-LjK">
-                                    <size key="minSize" width="4" height="14"/>
-                                    <size key="maxSize" width="4" height="14"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="kvJ-Pv-o54"/>
+                                <toolbarItem implicitItemIdentifier="98EC409C-2352-472C-936E-F6E25CA48E80" label="Delete Page" paletteLabel="Delete Page" tag="-1" image="NSStopProgressFreestandingTemplate" sizingBehavior="auto" id="FPe-Y4-LjK">
                                     <connections>
                                         <action selector="deletePageWith_sender:" target="6f7-a7-6o1" id="v8o-9K-6tM"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="kvJ-Pv-o54"/>
                                 <toolbarItem implicitItemIdentifier="863397C0-6DC1-4B68-8DE2-51567380B52C" label="" paletteLabel="" sizingBehavior="auto" id="qdS-CY-Yl8">
                                     <nil key="toolTip"/>
                                     <searchField key="view" wantsLayer="YES" focusRingType="none" verticalHuggingPriority="750" textCompletion="NO" id="1T0-2Q-xT3">
-                                        <rect key="frame" x="0.0" y="14" width="150" height="22"/>
+                                        <rect key="frame" x="0.0" y="14" width="150" height="24"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="zSo-aE-svq">
                                             <font key="font" metaFont="system"/>
@@ -1052,12 +1049,14 @@ DQ
                                 </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
+                                <toolbarItem reference="kij-yI-Xp8"/>
+                                <toolbarItem reference="kvJ-Pv-o54"/>
                                 <toolbarItem reference="8Y5-xP-tJa"/>
                                 <toolbarItem reference="FPe-Y4-LjK"/>
                                 <toolbarItem reference="khY-yD-egj"/>
                                 <toolbarItem reference="4dp-1j-PT3"/>
                                 <toolbarItem reference="CSM-AZ-V3X"/>
-                                <toolbarItem reference="kvJ-Pv-o54"/>
+                                <toolbarItem reference="khY-yD-egj"/>
                                 <toolbarItem reference="qKU-qV-qBz"/>
                                 <toolbarItem reference="kvJ-Pv-o54"/>
                                 <toolbarItem reference="qdS-CY-Yl8"/>
@@ -1068,98 +1067,87 @@ DQ
                         </connections>
                     </window>
                     <connections>
-                        <segue destination="5gI-5U-AMq" kind="relationship" relationship="window.shadowedContentViewController" id="nsd-lR-9xd"/>
+                        <segue destination="9sh-nG-9Lo" kind="relationship" relationship="window.shadowedContentViewController" id="Lon-0p-Kev"/>
                     </connections>
                 </windowController>
                 <customObject id="6f7-a7-6o1" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-43" y="87"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="hIz-AP-VOD">
+        <!--My Split View Controller-->
+        <scene sceneID="JO0-BW-ArQ">
             <objects>
-                <viewController id="5gI-5U-AMq" customClass="ViewController" customModule="ReView" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" wantsLayer="YES" id="ERx-hH-rdd">
-                        <rect key="frame" x="0.0" y="0.0" width="1013" height="869"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <splitViewController id="9sh-nG-9Lo" customClass="MySplitViewController" customModule="ReView" customModuleProvider="target" sceneMemberID="viewController">
+                    <splitViewItems>
+                        <splitViewItem canCollapse="YES" holdingPriority="260" behavior="sidebar" separatorStyle="line" id="XDS-sA-oM6"/>
+                        <splitViewItem id="4pw-uH-WEe"/>
+                    </splitViewItems>
+                    <splitView key="splitView" dividerStyle="thin" vertical="YES" id="Khh-05-f77">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <outlet property="delegate" destination="9sh-nG-9Lo" id="k9c-I1-6QN"/>
+                        </connections>
+                    </splitView>
+                    <connections>
+                        <outlet property="splitView" destination="Khh-05-f77" id="W0K-9H-abf"/>
+                        <segue destination="jlT-iG-fzU" kind="relationship" relationship="splitItems" id="LPx-db-h99"/>
+                        <segue destination="FDt-PW-emw" kind="relationship" relationship="splitItems" id="EtM-Jz-RgL"/>
+                    </connections>
+                </splitViewController>
+                <customObject id="eq2-JB-aqz" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="754" y="383"/>
+        </scene>
+        <!--Thumbnail View Controller-->
+        <scene sceneID="K6E-Ut-BuT">
+            <objects>
+                <viewController id="jlT-iG-fzU" customClass="ThumbnailViewController" customModule="ReView" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="hlb-1u-Fh4">
+                        <rect key="frame" x="0.0" y="0.0" width="180" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <splitView arrangesAllSubviews="NO" dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bff-KZ-cjM">
-                                <rect key="frame" x="0.0" y="0.0" width="1013" height="869"/>
-                                <subviews>
-                                    <customView id="ret-Ke-fJb">
-                                        <rect key="frame" x="0.0" y="0.0" width="150" height="869"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <subviews>
-                                            <pdfThumbnailView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QuC-JU-lay">
-                                                <rect key="frame" x="0.0" y="0.0" width="150" height="869"/>
-                                                <size key="thumbnailSize" width="200" height="200"/>
-                                            </pdfThumbnailView>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="QuC-JU-lay" secondAttribute="trailing" id="fe9-J1-IiL"/>
-                                            <constraint firstAttribute="bottom" secondItem="QuC-JU-lay" secondAttribute="bottom" id="ftb-kE-qh7"/>
-                                            <constraint firstItem="QuC-JU-lay" firstAttribute="top" secondItem="ret-Ke-fJb" secondAttribute="top" id="gzF-qL-xNs"/>
-                                            <constraint firstItem="QuC-JU-lay" firstAttribute="leading" secondItem="ret-Ke-fJb" secondAttribute="leading" id="wsT-6N-vS1"/>
-                                        </constraints>
-                                    </customView>
-                                    <customView fixedFrame="YES" id="RdM-83-nS7">
-                                        <rect key="frame" x="160" y="0.0" width="853" height="869"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <subviews>
-                                            <pdfView autoresizesSubviews="NO" wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kRq-36-uoz">
-                                                <rect key="frame" x="0.0" y="0.0" width="853" height="869"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            </pdfView>
-                                        </subviews>
-                                    </customView>
-                                </subviews>
-                                <holdingPriorities>
-                                    <real value="250"/>
-                                    <real value="100"/>
-                                </holdingPriorities>
-                            </splitView>
+                            <pdfThumbnailView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QuC-JU-lay">
+                                <rect key="frame" x="0.0" y="0.0" width="180" height="300"/>
+                                <size key="thumbnailSize" width="200" height="200"/>
+                            </pdfThumbnailView>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="bff-KZ-cjM" secondAttribute="trailing" id="6fw-vV-jj5"/>
-                            <constraint firstItem="bff-KZ-cjM" firstAttribute="leading" secondItem="ERx-hH-rdd" secondAttribute="leading" id="dQ4-FB-ajo"/>
-                            <constraint firstAttribute="bottom" secondItem="bff-KZ-cjM" secondAttribute="bottom" id="eZy-0U-NeM"/>
-                            <constraint firstItem="bff-KZ-cjM" firstAttribute="top" secondItem="ERx-hH-rdd" secondAttribute="top" id="l7k-eW-qrq"/>
+                            <constraint firstItem="QuC-JU-lay" firstAttribute="leading" secondItem="hlb-1u-Fh4" secondAttribute="leading" id="0h4-D4-o3h"/>
+                            <constraint firstAttribute="bottom" secondItem="QuC-JU-lay" secondAttribute="bottom" id="S12-2J-Lmj"/>
+                            <constraint firstAttribute="trailing" secondItem="QuC-JU-lay" secondAttribute="trailing" id="pcS-De-K62"/>
+                            <constraint firstItem="QuC-JU-lay" firstAttribute="top" secondItem="hlb-1u-Fh4" secondAttribute="top" id="quH-cb-DNS"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="thePDFView" destination="kRq-36-uoz" id="vZS-OE-jgh"/>
-                        <outlet property="theThumbnailView" destination="QuC-JU-lay" id="Mcj-kA-rAg"/>
+                        <outlet property="theThumbnailView" destination="QuC-JU-lay" id="KrX-eB-YeK"/>
                     </connections>
                 </viewController>
-                <customObject id="2Tp-Fl-jBw" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <toolbar implicitIdentifier="09D11707-F4A3-4FD5-970E-AC5832E91C2B" autosavesConfiguration="NO" showsBaselineSeparator="NO" displayMode="iconAndLabel" sizeMode="regular" id="4Yq-h4-ssk">
-                    <allowedToolbarItems>
-                        <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="iQt-Wc-fNg"/>
-                        <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="LeM-0n-NcY"/>
-                        <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="7WG-hd-ehx"/>
-                        <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="m9y-0x-GGf"/>
-                        <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="BFd-Nq-VO1"/>
-                        <toolbarItem implicitItemIdentifier="C7A610A2-2B2F-47B5-9B86-616DD2458078" label="Custom View" paletteLabel="Custom View" title="Button" sizingBehavior="auto" id="OmV-v3-qwB">
-                            <nil key="toolTip"/>
-                            <button key="view" verticalHuggingPriority="750" id="tmT-hs-AcZ">
-                                <rect key="frame" x="1" y="14" width="75" height="32"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="KEx-AF-6y2">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                            </button>
-                        </toolbarItem>
-                    </allowedToolbarItems>
-                    <defaultToolbarItems>
-                        <toolbarItem reference="iQt-Wc-fNg"/>
-                        <toolbarItem reference="LeM-0n-NcY"/>
-                        <toolbarItem reference="BFd-Nq-VO1"/>
-                        <toolbarItem reference="7WG-hd-ehx"/>
-                    </defaultToolbarItems>
-                </toolbar>
+                <customObject id="09C-MD-B80" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="279.5" y="1180.5"/>
+            <point key="canvasLocation" x="1290" y="202"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Uwc-Gl-DJo">
+            <objects>
+                <viewController id="FDt-PW-emw" customClass="PDFViewController" customModule="ReView" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="JOl-Aj-Yta">
+                        <rect key="frame" x="0.0" y="0.0" width="270" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <pdfView autoresizesSubviews="NO" wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kRq-36-uoz">
+                                <rect key="frame" x="0.0" y="0.0" width="270" height="300"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </pdfView>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="thePDFView" destination="kRq-36-uoz" id="nZr-yK-uKJ"/>
+                    </connections>
+                </viewController>
+                <customObject id="9uG-tA-729" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1335" y="574"/>
         </scene>
     </scenes>
     <resources>
@@ -1167,5 +1155,6 @@ DQ
         <image name="NSStopProgressFreestandingTemplate" width="20" height="20"/>
         <image name="NSTouchBarRotateLeftTemplate" width="19" height="21"/>
         <image name="NSTouchBarRotateRightTemplate" width="19" height="21"/>
+        <image name="NSTouchBarSidebarTemplate" width="24" height="18"/>
     </resources>
 </document>

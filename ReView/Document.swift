@@ -31,8 +31,8 @@ class Document: NSDocument {
         return false
     }
     
-    var viewController: ViewController? {
-        return windowControllers.first?.contentViewController as? ViewController
+    var viewController: MySplitViewController? {
+        return windowControllers.first?.contentViewController as? MySplitViewController
     }
     
     override func makeWindowControllers() {
@@ -41,8 +41,8 @@ class Document: NSDocument {
         let windowController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier("Document Window Controller")) as! NSWindowController
         windowController.shouldCascadeWindows = true
         self.addWindowController(windowController)
-        if let viewController = windowController.contentViewController as! ViewController? {
-            viewController.representedObject = self
+        if let viewController = windowController.contentViewController as? MySplitViewController {
+            viewController.pdfViewController?.representedObject = self
         }
        // windowController.window?.titleVisibility = .hidden
     }

@@ -7,10 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1048C2D62F22249B0044A3A4 /* PDFViewControllerActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1048C2D52F2224920044A3A4 /* PDFViewControllerActions.swift */; };
+		1048C2D82F2225F90044A3A4 /* MySplitViewControllerActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1048C2D72F2225EF0044A3A4 /* MySplitViewControllerActions.swift */; };
 		B51432F1223A515900F34D39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51432F0223A515900F34D39 /* AppDelegate.swift */; };
-		B51432F3223A515900F34D39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51432F2223A515900F34D39 /* ViewController.swift */; };
+		B51432F3223A515900F34D39 /* MySplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51432F2223A515900F34D39 /* MySplitViewController.swift */; };
 		B51432F5223A515900F34D39 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51432F4223A515900F34D39 /* Document.swift */; };
 		B51432FA223A515B00F34D39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B51432F8223A515B00F34D39 /* Main.storyboard */; };
+		B51864F72F1FA0AB00F3605A /* PDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51864F52F1FA0AB00F3605A /* PDFViewController.swift */; };
+		B51864F82F1FA0AB00F3605A /* ThumbnailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51864F62F1FA0AB00F3605A /* ThumbnailViewController.swift */; };
 		B55F09982348DDC800507D1D /* quartzPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55F09972348DDC800507D1D /* quartzPanelViewController.swift */; };
 		B57C06932375EA320028CFF8 /* ToCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57C06922375EA320028CFF8 /* ToCViewController.swift */; };
 		B57C06982378A4F80028CFF8 /* DocumentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57C06972378A4F80028CFF8 /* DocumentController.swift */; };
@@ -20,14 +24,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1048C2D52F2224920044A3A4 /* PDFViewControllerActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewControllerActions.swift; sourceTree = "<group>"; };
+		1048C2D72F2225EF0044A3A4 /* MySplitViewControllerActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySplitViewControllerActions.swift; sourceTree = "<group>"; };
 		B51432ED223A515900F34D39 /* ReView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B51432F0223A515900F34D39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B51432F2223A515900F34D39 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B51432F2223A515900F34D39 /* MySplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySplitViewController.swift; sourceTree = "<group>"; };
 		B51432F4223A515900F34D39 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		B51432F6223A515B00F34D39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B51432F9223A515B00F34D39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B51432FB223A515B00F34D39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B51432FC223A515B00F34D39 /* ReView.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ReView.entitlements; sourceTree = "<group>"; };
+		B51864F52F1FA0AB00F3605A /* PDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
+		B51864F62F1FA0AB00F3605A /* ThumbnailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailViewController.swift; sourceTree = "<group>"; };
 		B55F09972348DDC800507D1D /* quartzPanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = quartzPanelViewController.swift; sourceTree = "<group>"; };
 		B57C06922375EA320028CFF8 /* ToCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToCViewController.swift; sourceTree = "<group>"; };
 		B57C06972378A4F80028CFF8 /* DocumentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentController.swift; sourceTree = "<group>"; };
@@ -69,8 +77,12 @@
 			children = (
 				B51432F0223A515900F34D39 /* AppDelegate.swift */,
 				B57C06972378A4F80028CFF8 /* DocumentController.swift */,
-				B51432F2223A515900F34D39 /* ViewController.swift */,
+				B51432F2223A515900F34D39 /* MySplitViewController.swift */,
+				1048C2D72F2225EF0044A3A4 /* MySplitViewControllerActions.swift */,
 				B51432F4223A515900F34D39 /* Document.swift */,
+				B51864F52F1FA0AB00F3605A /* PDFViewController.swift */,
+				1048C2D52F2224920044A3A4 /* PDFViewControllerActions.swift */,
+				B51864F62F1FA0AB00F3605A /* ThumbnailViewController.swift */,
 				B5FD674423103C4C007265B7 /* Scrapbook.swift */,
 				B51432F6223A515B00F34D39 /* Assets.xcassets */,
 				B51432F8223A515B00F34D39 /* Main.storyboard */,
@@ -167,11 +179,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				B55F09982348DDC800507D1D /* quartzPanelViewController.swift in Sources */,
-				B51432F3223A515900F34D39 /* ViewController.swift in Sources */,
+				B51432F3223A515900F34D39 /* MySplitViewController.swift in Sources */,
 				B57C06982378A4F80028CFF8 /* DocumentController.swift in Sources */,
+				1048C2D62F22249B0044A3A4 /* PDFViewControllerActions.swift in Sources */,
 				B51432F1223A515900F34D39 /* AppDelegate.swift in Sources */,
+				1048C2D82F2225F90044A3A4 /* MySplitViewControllerActions.swift in Sources */,
 				B5FD674523103C4C007265B7 /* Scrapbook.swift in Sources */,
 				B51432F5223A515900F34D39 /* Document.swift in Sources */,
+				B51864F72F1FA0AB00F3605A /* PDFViewController.swift in Sources */,
+				B51864F82F1FA0AB00F3605A /* ThumbnailViewController.swift in Sources */,
 				B57C06932375EA320028CFF8 /* ToCViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -312,17 +328,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 48;
+				CURRENT_PROJECT_VERSION = 52;
+				DEVELOPMENT_TEAM = CAUQJ83L9Q;
 				INFOPLIST_FILE = ReView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.5;
-				MARKETING_VERSION = 0.23;
-				PRODUCT_BUNDLE_IDENTIFIER = bensoft.ReView;
+				MARKETING_VERSION = 0.35;
+				PRODUCT_BUNDLE_IDENTIFIER = com.christophergarner.bensoft.ReView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -333,17 +351,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 48;
+				CURRENT_PROJECT_VERSION = 52;
+				DEVELOPMENT_TEAM = CAUQJ83L9Q;
 				INFOPLIST_FILE = ReView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.5;
-				MARKETING_VERSION = 0.23;
-				PRODUCT_BUNDLE_IDENTIFIER = bensoft.ReView;
+				MARKETING_VERSION = 0.35;
+				PRODUCT_BUNDLE_IDENTIFIER = com.christophergarner.bensoft.ReView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
