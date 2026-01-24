@@ -19,6 +19,11 @@ Much of this is far beyond my abilities, so please feel free to contribute! Grat
 
 # Release Notes
 
+### 0.40
+* Horizontal and Vertical page layout.
+* Improved sidebar interface.
+* Fix to menu items' status when more than one window open.
+
 ### 0.23
 * Text search function added.
 * Fix to prevent documents being 'held open', causing trouble with Time Machine.
