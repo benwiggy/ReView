@@ -8,7 +8,7 @@
 import Cocoa
 import Quartz
 
-class PDFViewController: NSViewController {
+class PDFViewController: NSViewController, NSMenuItemValidation {
     
     // SETUP
     @IBOutlet var thePDFView: PDFView!
@@ -27,10 +27,12 @@ class PDFViewController: NSViewController {
     var document: Document! {
         representedObject as? Document
     }
+
     
     // These should be prefs
     var theDisplayMode: PDFDisplayMode! = .singlePageContinuous
     var bookState: Bool = true
+    var theDisplayDirection: PDFDisplayDirection! = .vertical
     let defaults = UserDefaults.standard
     
     
@@ -48,6 +50,60 @@ class PDFViewController: NSViewController {
             }
         }
     }
+    
+    // FOUR separate functions, just to get Horizontal/Vertical menu items working..!!!!
+    
+    //- Menu validation.
+     func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+         switch menuItem.action {
+
+         case #selector(toggleHorizontal(_:)):
+             menuItem.state = (theDisplayDirection == .horizontal) ? .on : .off
+             return true
+
+         case #selector(toggleVertical(_:)):
+             menuItem.state = (theDisplayDirection == .vertical) ? .on : .off
+             return true
+             
+         case #selector(changePageStyle(_:)):
+             guard let pdfView = thePDFView else { return false }
+
+             switch pdfView.displayMode {
+             case .singlePage: menuItem.state = (menuItem.tag == 0) ? .on : .off
+             case .singlePageContinuous: menuItem.state = (menuItem.tag == 1) ? .on : .off
+             case .twoUp: menuItem.state = (menuItem.tag == 2) ? .on : .off
+             case .twoUpContinuous: menuItem.state = (menuItem.tag == 3) ? .on : .off
+             default: menuItem.state = .off
+             }
+             return true
+
+         default:
+             return true
+         }
+     }
+    
+    
+    func applyDisplayDirection(_ direction: PDFDisplayDirection) {
+        guard let pdfView = thePDFView else { return }
+
+        let currentPage = pdfView.currentPage
+
+        theDisplayDirection = direction
+        pdfView.displayDirection = direction
+
+        if let page = currentPage {
+            pdfView.go(to: page)
+        }
+    }
+    
+    @IBAction func toggleHorizontal(_ sender: Any?) {
+        applyDisplayDirection(.horizontal)
+        }
+
+    @IBAction func toggleVertical(_ sender: Any?) {
+        applyDisplayDirection(.vertical)
+    }
+    
         
     // OVERRIDES
     override func viewDidLoad() {
@@ -56,7 +112,8 @@ class PDFViewController: NSViewController {
         // Register initial defaults (only used if keys don’t exist yet)
         defaults.register(defaults: [
             "pageViewStyle": 1,   // 0=singlePage, 1=singlePageContinuous, 2=twoUp, 3=twoUpContinuous
-            "bookState": true
+            "bookState": true,
+             "horizontal": false
         ])
         
         //  Read saved values
@@ -107,11 +164,19 @@ class PDFViewController: NSViewController {
         }
     }
     
+
     override func viewWillAppear() {
+        super.viewWillAppear()
         loadViewParameters()
         
     }
     
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        view.window?.makeFirstResponder(view)
+    }
+    
+
     override var representedObject: Any? {
         didSet {
             loadViewParameters()
@@ -146,12 +211,14 @@ class PDFViewController: NSViewController {
         thePDFView?.document = document?.thePDFDocument
         thePDFView.layoutDocumentView()
         thePDFView.autoScales = true   // always fit to window
-        //   thePDFView.setNeedsDisplay(view.bounds)
+        thePDFView.scaleFactor = thePDFView.scaleFactorForSizeToFit
+        thePDFView.displayDirection = theDisplayDirection
         theThumbnailView?.pdfView = self.thePDFView
         theThumbnailView?.setNeedsDisplay(view.bounds)
         // "Go to same page" reselects the page in thumbnail
         thePDFView.goToNextPage(Any?.self)
         thePDFView.goToPreviousPage(Any?.self)
+     //   thePDFView.goToFirstPage(Any?.self)
     }
         
     @objc func handleDocumentReverted(_ note: Notification) {
@@ -162,6 +229,8 @@ class PDFViewController: NSViewController {
         theThumbnailView?.setNeedsDisplay(theThumbnailView!.bounds)
         
     }
+    
+
     
     /*
      func getOutlines: {

@@ -31,11 +31,6 @@ class ThumbnailViewController: NSViewController {
         pdfViewController?.document
     }
     
-    // These should be prefs
-    var theDisplayMode: PDFDisplayMode! = .singlePageContinuous
-    var bookState: Bool = true
-    let defaults = UserDefaults.standard
-    
     // FUNCTIONS THAT EDIT
     // TO DO: Make Undo function
         

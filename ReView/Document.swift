@@ -61,6 +61,11 @@ class Document: NSDocument {
         }
     }
     
+    // For creating New documents - see Document Controller
+    func load(pdfDocument: PDFDocument) {
+        self.thePDFDocument = pdfDocument
+    }
+    
     // Provide warning that Save will overwrite the existing file. Also allow user to turn it off.
     override func save(_ sender: Any?) {
 

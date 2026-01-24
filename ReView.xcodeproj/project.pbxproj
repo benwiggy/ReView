@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,10 +15,10 @@
 		B51432FA223A515B00F34D39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B51432F8223A515B00F34D39 /* Main.storyboard */; };
 		B51864F72F1FA0AB00F3605A /* PDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51864F52F1FA0AB00F3605A /* PDFViewController.swift */; };
 		B51864F82F1FA0AB00F3605A /* ThumbnailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51864F62F1FA0AB00F3605A /* ThumbnailViewController.swift */; };
+		B518651C2F23F05C00F3605A /* Better PDFX-3.qfilter in Resources */ = {isa = PBXBuildFile; fileRef = B518651B2F23F05C00F3605A /* Better PDFX-3.qfilter */; };
 		B55F09982348DDC800507D1D /* quartzPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55F09972348DDC800507D1D /* quartzPanelViewController.swift */; };
 		B57C06932375EA320028CFF8 /* ToCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57C06922375EA320028CFF8 /* ToCViewController.swift */; };
 		B57C06982378A4F80028CFF8 /* DocumentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57C06972378A4F80028CFF8 /* DocumentController.swift */; };
-		B5B538412312CCC600453D01 /* Better PDFX-3.qfilter in Resources */ = {isa = PBXBuildFile; fileRef = B5B538402312CCC600453D01 /* Better PDFX-3.qfilter */; };
 		B5DAB34B230965720034F6A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B51432F6223A515B00F34D39 /* Assets.xcassets */; };
 		B5FD674523103C4C007265B7 /* Scrapbook.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FD674423103C4C007265B7 /* Scrapbook.swift */; };
 /* End PBXBuildFile section */
@@ -36,10 +36,10 @@
 		B51432FC223A515B00F34D39 /* ReView.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ReView.entitlements; sourceTree = "<group>"; };
 		B51864F52F1FA0AB00F3605A /* PDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
 		B51864F62F1FA0AB00F3605A /* ThumbnailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailViewController.swift; sourceTree = "<group>"; };
+		B518651B2F23F05C00F3605A /* Better PDFX-3.qfilter */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Better PDFX-3.qfilter"; sourceTree = "<group>"; };
 		B55F09972348DDC800507D1D /* quartzPanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = quartzPanelViewController.swift; sourceTree = "<group>"; };
 		B57C06922375EA320028CFF8 /* ToCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToCViewController.swift; sourceTree = "<group>"; };
 		B57C06972378A4F80028CFF8 /* DocumentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentController.swift; sourceTree = "<group>"; };
-		B5B538402312CCC600453D01 /* Better PDFX-3.qfilter */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Better PDFX-3.qfilter"; sourceTree = "<group>"; };
 		B5FD674423103C4C007265B7 /* Scrapbook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scrapbook.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -57,7 +57,6 @@
 		B51432E4223A515900F34D39 = {
 			isa = PBXGroup;
 			children = (
-				B5B538402312CCC600453D01 /* Better PDFX-3.qfilter */,
 				B51432EF223A515900F34D39 /* ReView */,
 				B51432EE223A515900F34D39 /* Products */,
 				B57C068E2375E0400028CFF8 /* Frameworks */,
@@ -77,14 +76,15 @@
 			children = (
 				B51432F0223A515900F34D39 /* AppDelegate.swift */,
 				B57C06972378A4F80028CFF8 /* DocumentController.swift */,
+				B51432F4223A515900F34D39 /* Document.swift */,
 				B51432F2223A515900F34D39 /* MySplitViewController.swift */,
 				1048C2D72F2225EF0044A3A4 /* MySplitViewControllerActions.swift */,
-				B51432F4223A515900F34D39 /* Document.swift */,
 				B51864F52F1FA0AB00F3605A /* PDFViewController.swift */,
 				1048C2D52F2224920044A3A4 /* PDFViewControllerActions.swift */,
 				B51864F62F1FA0AB00F3605A /* ThumbnailViewController.swift */,
 				B5FD674423103C4C007265B7 /* Scrapbook.swift */,
 				B51432F6223A515B00F34D39 /* Assets.xcassets */,
+				B518651B2F23F05C00F3605A /* Better PDFX-3.qfilter */,
 				B51432F8223A515B00F34D39 /* Main.storyboard */,
 				B55F09972348DDC800507D1D /* quartzPanelViewController.swift */,
 				B57C06922375EA320028CFF8 /* ToCViewController.swift */,
@@ -127,8 +127,9 @@
 		B51432E5223A515900F34D39 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1010;
-				LastUpgradeCheck = 1250;
+				LastUpgradeCheck = 2620;
 				ORGANIZATIONNAME = Ben;
 				TargetAttributes = {
 					B51432EC223A515900F34D39 = {
@@ -167,7 +168,7 @@
 			files = (
 				B5DAB34B230965720034F6A3 /* Assets.xcassets in Resources */,
 				B51432FA223A515B00F34D39 /* Main.storyboard in Resources */,
-				B5B538412312CCC600453D01 /* Better PDFX-3.qfilter in Resources */,
+				B518651C2F23F05C00F3605A /* Better PDFX-3.qfilter in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,9 +242,12 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = GDSEUFVD4C;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -263,6 +267,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -303,9 +308,12 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = GDSEUFVD4C;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -318,6 +326,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
@@ -331,16 +340,16 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 52;
-				DEVELOPMENT_TEAM = GDSEUFVD4C;
+				CURRENT_PROJECT_VERSION = 64;
+				DEAD_CODE_STRIPPING = YES;
 				INFOPLIST_FILE = ReView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.5;
-				MARKETING_VERSION = 0.35;
-				PRODUCT_BUNDLE_IDENTIFIER = com.christophergarner.bensoft.ReView;
+				MARKETING_VERSION = 0.4;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bensoft.ReView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -354,16 +363,16 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 52;
-				DEVELOPMENT_TEAM = GDSEUFVD4C;
+				CURRENT_PROJECT_VERSION = 64;
+				DEAD_CODE_STRIPPING = YES;
 				INFOPLIST_FILE = ReView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.5;
-				MARKETING_VERSION = 0.35;
-				PRODUCT_BUNDLE_IDENTIFIER = com.christophergarner.bensoft.ReView;
+				MARKETING_VERSION = 0.4;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bensoft.ReView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
