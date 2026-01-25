@@ -26,8 +26,8 @@ Version 1.0 has the following features:
 * Horizontal or vertical PDF page layouts (in Single Page Continuous mode).
 * Default view styles can be set in Preferences and saved.
 * Individual pages can be rotated left or right.
-* Deletes individual pages (with warning).
-* Adds blank pages
+* Individual pages can be deleted (with warning).
+* Blank pages can be added.
 * Print using accurate page positioning for duplexing with enhanced print panel.
 * Applies Quartz Filters to PDF documents.
 * Saves documents when asked, if altered.
@@ -39,6 +39,6 @@ Version 1.0 has the following features:
 
 
 #### To Do List and Known problems:
-* Dragging thumbnails to change page order (doesn't work currently)
+* Dragging thumbnails is unreliable and not recommended.
 * Editing and Viewing PDF Outlines (bookmarks) in sidebar.
 
