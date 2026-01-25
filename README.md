@@ -19,35 +19,26 @@ Much of this is far beyond my abilities, so please feel free to contribute! Grat
 
 # Release Notes
 
-### 0.40
-* Horizontal or vertical PDF page layouts.
+### v.1.0 Stable Release!
+
+Version 1.0 has the following features:  
+* Opens PDFs for Viewing as 1-up or 2-up (with first page on its own or not); Single or Continuous pages.
+* Horizontal or vertical PDF page layouts (in Single Page Continuous mode).
+* Default view styles can be set in Preferences and saved.
+* Individual pages can be rotated left or right.
+* Deletes individual pages (with warning).
+* Adds blank pages
+* Print using accurate page positioning for duplexing with enhanced print panel.
+* Applies Quartz Filters to PDF documents.
+* Saves documents when asked, if altered.
 * New PDF from Clipboard image data.
 * Improved sidebar UI.
 * App is now signed, so will run on any Mac without annoyance.
-
-### 0.23
-* Text search function added.
-* Fix to prevent documents being 'held open', causing trouble with Time Machine.
-
-### 0.20
-Review is still very much in 'alpha' phase. The current release of ReView does the following:
-* Opens PDFs for Viewing as 1-up or 2-up (with first page on its own or not); Single or Continuous pages.
-* Rotate individual pages left or right
-* Prints using accurate page positioning for duplexing with enhanced print panel.
-* Deletes individual pages (with warning).
-* Adds blank pages
-* Applies Quartz Filters to PDF documents.
-* Saves documents when asked, if altered.
-
-Fixes:  
 * Undo now supported for page rotation and deletion. (E.g. not for Quartz Filters.)
-* Window management improved.
 
-### 0.15
-Initial attempt.
+
 
 #### To Do List and Known problems:
 * Dragging thumbnails to change page order (doesn't work currently)
 * Editing and Viewing PDF Outlines (bookmarks) in sidebar.
-* Preferences and saved settings, e.g. View style.
 
