@@ -35,10 +35,10 @@ class MySplitViewController: NSSplitViewController {
         pdfViewController?.representedObject as? Document
     }
     
-    // These should be prefs
-    var theDisplayMode: PDFDisplayMode! = .singlePageContinuous
-    var bookState: Bool = true
-    let defaults = UserDefaults.standard
+//    // These should be prefs
+//    var theDisplayMode: PDFDisplayMode! = .singlePageContinuous
+//    var bookState: Bool = true
+//    let defaults = UserDefaults.standard
 
     // OVERRIDES
     override func viewDidLoad() {
@@ -56,6 +56,7 @@ class MySplitViewController: NSSplitViewController {
         
     }
     
+    
     override var representedObject: Any? {
         didSet {
             loadViewParameters()
@@ -63,7 +64,7 @@ class MySplitViewController: NSSplitViewController {
     }
 
     @IBAction func sidebar(_ sender: Any?){
-        splitViewItems[0].isCollapsed = !splitViewItems[0].isCollapsed
+        splitViewItems[0].animator().isCollapsed = !splitViewItems[0].isCollapsed
     }
 }
 

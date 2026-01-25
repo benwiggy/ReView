@@ -30,6 +30,22 @@ extension PDFViewController {
             }
         }
     }
+    
+  @objc  @IBAction func changeAxis (_ sender: NSMenuItem) {
+        switch sender.tag {
+    case 0:
+        theDisplayDirection = .horizontal
+            menu!.item(withTag: 0)!.state = .on
+            menu!.item(withTag: 1)!.state = .off
+    case 1:
+        theDisplayDirection = .vertical
+            menu!.item(withTag: 0)!.state = .off
+            menu!.item(withTag: 1)!.state = .on
+    default:
+        return
+    }
+        thePDFView.displayDirection = theDisplayDirection
+    }
 
     // Go to next search result
     @IBAction func goToNextSearchResult(_ sender: Any?) {
@@ -57,12 +73,10 @@ extension PDFViewController {
             thePDFView.displaysAsBook = false
             sender.state = .off
             bookState = false
-            self.defaults.set(false, forKey: bookStateKey)
         } else {
             thePDFView.displaysAsBook = true
             sender.state = .on
             bookState = true
-            self.defaults.set(true, forKey: bookStateKey)
         }
     }
     
@@ -129,9 +143,10 @@ extension PDFViewController {
                 if let thePDFDocument = document?.thePDFDocument {
                     blankPage.setBounds(pageSize, for: .mediaBox)
                     document?.insert(blankPage: blankPage, at: ((thePDFDocument.index(for: page))))
+                    document?.rinse()
                 }
             }
-            document?.rinse()
+            
         }
     }
     
@@ -169,7 +184,7 @@ extension PDFViewController {
         if let pageCount = thePDFView.document?.pageCount {
             if pageCount > 1 {
                 if let selectedPages = theThumbnailView?.selectedPages {
-                    for page in selectedPages {
+                    for _ in selectedPages {
                         
                         let selectedPageNo: Int? = (thePDFView.document!.index(for: thePDFView.currentPage!))
                         
@@ -187,7 +202,6 @@ extension PDFViewController {
                         default:
                             break
                         }
-                        
                     }
                 } else {
                     let alert = NSAlert()

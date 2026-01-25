@@ -24,7 +24,11 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
+                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW">
+                                            <connections>
+                                                <action selector="showPreferences:" target="Ady-hI-5gd" id="FsG-2S-gkr"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
                                         <menuItem title="Services" id="NMo-om-nkz">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -61,9 +65,9 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="File" id="bib-Uj-vzu">
                                     <items>
-                                        <menuItem title="New" keyEquivalent="n" id="Was-JA-tGl">
+                                        <menuItem title="New from Clipboard" keyEquivalent="n" id="TLS-9V-7cQ">
                                             <connections>
-                                                <action selector="newDocument:" target="Ady-hI-5gd" id="4Si-XN-c54"/>
+                                                <action selector="myNewFile:" target="Ady-hI-5gd" id="UrL-El-ggG"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Open…" keyEquivalent="o" id="IAo-SY-fd9">
@@ -389,9 +393,6 @@ CA
                                         </menuItem>
                                     </items>
                                 </menu>
-                                <connections>
-                                    <action selector="showHelp:" target="Ady-hI-5gd" id="aPk-85-UCN"/>
-                                </connections>
                             </menuItem>
                             <menuItem title="Format" id="jxT-CU-nIS">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -702,6 +703,17 @@ CA
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="abi-El-WLZ"/>
+                                        <menuItem title="Horizontal" image="rectangle.portrait.and.arrow.right" catalog="system" keyEquivalent="4" allowsKeyEquivalentWhenHidden="YES" id="pzq-7D-81K">
+                                            <connections>
+                                                <action selector="toggleHorizontal:" target="Ady-hI-5gd" id="zmZ-0q-CIg"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Vertical" image="square.and.arrow.down" catalog="system" tag="1" keyEquivalent="5" allowsKeyEquivalentWhenHidden="YES" id="Jaw-L8-Gf2">
+                                            <connections>
+                                                <action selector="toggleVertical:" target="Ady-hI-5gd" id="wsD-ic-fa4"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="Gqt-KB-7sq"/>
                                         <menuItem title="Show Sidebar" keyEquivalent="s" id="kIP-vf-haE">
                                             <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                                             <connections>
@@ -831,7 +843,7 @@ CA
                                                             <rect key="frame" x="11" y="1" width="121" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lck-BT-QaY">
+                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lck-BT-QaY">
                                                                     <rect key="frame" x="0.0" y="0.0" width="121" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="Yec-Mc-cJi">
@@ -863,7 +875,7 @@ CA
                                                             <rect key="frame" x="135" y="1" width="103" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qDD-iW-NhY">
+                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qDD-iW-NhY">
                                                                     <rect key="frame" x="0.0" y="0.0" width="103" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="nyp-zi-2db">
@@ -993,7 +1005,7 @@ DQ
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="Ckk-yw-fiv">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES"/>
-                        <rect key="contentRect" x="100" y="165" width="595" height="842"/>
+                        <rect key="contentRect" x="100" y="165" width="1000" height="1200"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <toolbar key="toolbar" implicitIdentifier="E3B866E9-E939-4BA8-BAB2-EAF3EA73AC53" autosavesConfiguration="NO" showsBaselineSeparator="NO" displayMode="iconAndLabel" sizeMode="regular" id="bgb-eb-1bz">
                             <allowedToolbarItems>
@@ -1031,8 +1043,8 @@ DQ
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="863397C0-6DC1-4B68-8DE2-51567380B52C" label="" paletteLabel="" sizingBehavior="auto" id="qdS-CY-Yl8">
                                     <nil key="toolTip"/>
-                                    <searchField key="view" wantsLayer="YES" focusRingType="none" verticalHuggingPriority="750" textCompletion="NO" id="1T0-2Q-xT3">
-                                        <rect key="frame" x="0.0" y="14" width="150" height="24"/>
+                                    <searchField key="view" wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" id="1T0-2Q-xT3">
+                                        <rect key="frame" x="0.0" y="14" width="150" height="22"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="zSo-aE-svq">
                                             <font key="font" metaFont="system"/>
@@ -1083,7 +1095,6 @@ DQ
                         <splitViewItem id="4pw-uH-WEe"/>
                     </splitViewItems>
                     <splitView key="splitView" dividerStyle="thin" vertical="YES" id="Khh-05-f77">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
                             <outlet property="delegate" destination="9sh-nG-9Lo" id="k9c-I1-6QN"/>
@@ -1097,7 +1108,7 @@ DQ
                 </splitViewController>
                 <customObject id="eq2-JB-aqz" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="754" y="383"/>
+            <point key="canvasLocation" x="-43" y="1418"/>
         </scene>
         <!--Thumbnail View Controller-->
         <scene sceneID="K6E-Ut-BuT">
@@ -1125,18 +1136,18 @@ DQ
                 </viewController>
                 <customObject id="09C-MD-B80" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1290" y="202"/>
+            <point key="canvasLocation" x="-934" y="2321"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Uwc-Gl-DJo">
             <objects>
                 <viewController id="FDt-PW-emw" customClass="PDFViewController" customModule="ReView" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="JOl-Aj-Yta">
-                        <rect key="frame" x="0.0" y="0.0" width="270" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1200"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <pdfView autoresizesSubviews="NO" wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kRq-36-uoz">
-                                <rect key="frame" x="0.0" y="0.0" width="270" height="300"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1000" height="1200"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </pdfView>
                         </subviews>
@@ -1147,7 +1158,7 @@ DQ
                 </viewController>
                 <customObject id="9uG-tA-729" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1335" y="574"/>
+            <point key="canvasLocation" x="-53" y="2732"/>
         </scene>
     </scenes>
     <resources>
@@ -1156,5 +1167,7 @@ DQ
         <image name="NSTouchBarRotateLeftTemplate" width="19" height="21"/>
         <image name="NSTouchBarRotateRightTemplate" width="19" height="21"/>
         <image name="NSTouchBarSidebarTemplate" width="24" height="18"/>
+        <image name="rectangle.portrait.and.arrow.right" catalog="system" width="18" height="16"/>
+        <image name="square.and.arrow.down" catalog="system" width="15" height="17"/>
     </resources>
 </document>

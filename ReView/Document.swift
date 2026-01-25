@@ -61,6 +61,11 @@ class Document: NSDocument {
         }
     }
     
+    // For creating New documents - see Document Controller
+    func load(pdfDocument: PDFDocument) {
+        self.thePDFDocument = pdfDocument
+    }
+    
     // Provide warning that Save will overwrite the existing file. Also allow user to turn it off.
     override func save(_ sender: Any?) {
 
@@ -117,17 +122,29 @@ class Document: NSDocument {
     // Make sure our page is centred on the paper, to avoid uneven margins.
     // (This gives the best fit when duplexing.)
     func thePrintInfo() -> NSPrintInfo {
-        let thePrintInfo = NSPrintInfo()
-        thePrintInfo.horizontalPagination = .fit
-        thePrintInfo.verticalPagination = .fit
-        thePrintInfo.isHorizontallyCentered = true
-        thePrintInfo.isVerticallyCentered = true
-        thePrintInfo.leftMargin = 0.0
-        thePrintInfo.rightMargin = 0.0
-        thePrintInfo.topMargin = 0.0
-        thePrintInfo.bottomMargin = 0.0
-        thePrintInfo.jobDisposition = .spool
-        return thePrintInfo
+        // Start from the document's existing printInfo
+        let printInfo = self.printInfo.copy() as! NSPrintInfo
+
+        // Set the print job name for Quartz
+        let jobName = self.fileURL?.lastPathComponent ?? "Clipboard.pdf"
+        printInfo.dictionary()["NSPrintJobName"] = jobName
+
+        // Preserve your existing pagination and centering settings
+        printInfo.horizontalPagination = .fit
+        printInfo.verticalPagination = .fit
+        printInfo.isHorizontallyCentered = true
+        printInfo.isVerticallyCentered = true
+
+        // Preserve your margins
+        printInfo.leftMargin = 0.0
+        printInfo.rightMargin = 0.0
+        printInfo.topMargin = 0.0
+        printInfo.bottomMargin = 0.0
+
+        // Keep the job disposition as spool
+        printInfo.jobDisposition = .spool
+
+        return printInfo
     }
     
     // Add the Page Setup options to the Print Dialog
@@ -143,10 +160,15 @@ class Document: NSDocument {
     }
     
     override func printDocument(_ sender: Any?) {
-        if let printOperation = thePDFDocument.printOperation(for: thePrintInfo(), scalingMode: .pageScaleNone, autoRotate: true){
-            printOperation.printPanel = thePrintPanel()
-            // Would prefer to use .runModal but don't know what the window is.
-            printOperation.run()
+        guard let pdfDoc = thePDFDocument else { return }
+
+        let printInfo = self.thePrintInfo()
+
+        if let printOp = pdfDoc.printOperation(for: printInfo, scalingMode: .pageScaleNone, autoRotate: true) {
+            printOp.jobTitle = self.fileURL?.lastPathComponent ?? "Clipboard.pdf"
+            printOp.printPanel = self.thePrintPanel()
+            Swift.print("Print job title:", printOp.jobTitle ?? "nil")
+            printOp.run()
         }
     }
     
