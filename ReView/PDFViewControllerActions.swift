@@ -135,19 +135,20 @@ extension PDFViewController {
     }
 
     @IBAction func addBlank(_ sender: Any?) {
-        if let selectedPages = theThumbnailView?.selectedPages {
-            // let selectedPageNo: Int? = (thePDFView.document!.index(for: thePDFView.currentPage!))
-            for page in selectedPages {
-                let pageSize = page.bounds(for: .mediaBox)
-                let blankPage = PDFPage.init()
-                if let thePDFDocument = document?.thePDFDocument {
-                    blankPage.setBounds(pageSize, for: .mediaBox)
-                    document?.insert(blankPage: blankPage, at: ((thePDFDocument.index(for: page))))
-                    document?.rinse()
-                }
-            }
-            
-        }
+        guard let pdfDoc = document?.thePDFDocument else { return }
+
+        // Use the first selected page or first page as template
+        let targetPage = theThumbnailView?.selectedPages?.first ?? pdfDoc.page(at: 0)
+        let pageSize = targetPage?.bounds(for: .mediaBox) ?? CGRect(x: 0, y: 0, width: 612, height: 792)
+
+        let blankPage = PDFPage()
+        blankPage.setBounds(pageSize, for: .mediaBox)
+
+        // Insert **in front of selected page** (or first page)
+        let index = targetPage.map { pdfDoc.index(for: $0) } ?? 0
+        pdfDoc.insert(blankPage, at: index)
+
+        document?.rinse()
     }
     
     @IBAction func rotateLeft(_sender: Any? ) {
