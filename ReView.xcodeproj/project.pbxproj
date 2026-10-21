@@ -14,7 +14,7 @@
 		B51432F5223A515900F34D39 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51432F4223A515900F34D39 /* Document.swift */; };
 		B51432FA223A515B00F34D39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B51432F8223A515B00F34D39 /* Main.storyboard */; };
 		B51864F72F1FA0AB00F3605A /* PDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51864F52F1FA0AB00F3605A /* PDFViewController.swift */; };
-		B51864F82F1FA0AB00F3605A /* ThumbnailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51864F62F1FA0AB00F3605A /* ThumbnailViewController.swift */; };
+		B51864F82F1FA0AB00F3605A /* DraggableThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51864F62F1FA0AB00F3605A /* DraggableThumbnailView.swift */; };
 		B518651C2F23F05C00F3605A /* Better PDFX-3.qfilter in Resources */ = {isa = PBXBuildFile; fileRef = B518651B2F23F05C00F3605A /* Better PDFX-3.qfilter */; };
 		B55F09982348DDC800507D1D /* quartzPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55F09972348DDC800507D1D /* quartzPanelViewController.swift */; };
 		B5673CBF2F2665B20008785F /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5673CBE2F2665B20008785F /* Preferences.storyboard */; };
@@ -22,6 +22,7 @@
 		B5673CC32F266BE40008785F /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5673CC22F266BE40008785F /* PreferencesWindowController.swift */; };
 		B57C06932375EA320028CFF8 /* ToCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57C06922375EA320028CFF8 /* ToCViewController.swift */; };
 		B57C06982378A4F80028CFF8 /* DocumentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57C06972378A4F80028CFF8 /* DocumentController.swift */; };
+		B5AF46C42F268D3C003CC4A6 /* ThumbnailVewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AF46C32F268D3C003CC4A6 /* ThumbnailVewController.swift */; };
 		B5DAB34B230965720034F6A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B51432F6223A515B00F34D39 /* Assets.xcassets */; };
 		B5FD674523103C4C007265B7 /* Scrapbook.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FD674423103C4C007265B7 /* Scrapbook.swift */; };
 /* End PBXBuildFile section */
@@ -38,7 +39,7 @@
 		B51432FB223A515B00F34D39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B51432FC223A515B00F34D39 /* ReView.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ReView.entitlements; sourceTree = "<group>"; };
 		B51864F52F1FA0AB00F3605A /* PDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
-		B51864F62F1FA0AB00F3605A /* ThumbnailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailViewController.swift; sourceTree = "<group>"; };
+		B51864F62F1FA0AB00F3605A /* DraggableThumbnailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableThumbnailView.swift; sourceTree = "<group>"; };
 		B518651B2F23F05C00F3605A /* Better PDFX-3.qfilter */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Better PDFX-3.qfilter"; sourceTree = "<group>"; };
 		B55F09972348DDC800507D1D /* quartzPanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = quartzPanelViewController.swift; sourceTree = "<group>"; };
 		B5673CBE2F2665B20008785F /* Preferences.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Preferences.storyboard; sourceTree = "<group>"; };
@@ -46,6 +47,7 @@
 		B5673CC22F266BE40008785F /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
 		B57C06922375EA320028CFF8 /* ToCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToCViewController.swift; sourceTree = "<group>"; };
 		B57C06972378A4F80028CFF8 /* DocumentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentController.swift; sourceTree = "<group>"; };
+		B5AF46C32F268D3C003CC4A6 /* ThumbnailVewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailVewController.swift; sourceTree = "<group>"; };
 		B5FD674423103C4C007265B7 /* Scrapbook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scrapbook.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,7 +89,8 @@
 				1048C2D72F2225EF0044A3A4 /* MySplitViewControllerActions.swift */,
 				B51864F52F1FA0AB00F3605A /* PDFViewController.swift */,
 				1048C2D52F2224920044A3A4 /* PDFViewControllerActions.swift */,
-				B51864F62F1FA0AB00F3605A /* ThumbnailViewController.swift */,
+				B51864F62F1FA0AB00F3605A /* DraggableThumbnailView.swift */,
+				B5AF46C32F268D3C003CC4A6 /* ThumbnailVewController.swift */,
 				B5FD674423103C4C007265B7 /* Scrapbook.swift */,
 				B51432F6223A515B00F34D39 /* Assets.xcassets */,
 				B518651B2F23F05C00F3605A /* Better PDFX-3.qfilter */,
@@ -194,13 +197,14 @@
 				B57C06982378A4F80028CFF8 /* DocumentController.swift in Sources */,
 				1048C2D62F22249B0044A3A4 /* PDFViewControllerActions.swift in Sources */,
 				B51432F1223A515900F34D39 /* AppDelegate.swift in Sources */,
+				B5AF46C42F268D3C003CC4A6 /* ThumbnailVewController.swift in Sources */,
 				1048C2D82F2225F90044A3A4 /* MySplitViewControllerActions.swift in Sources */,
 				B5673CC12F266AB90008785F /* PreferencesViewController.swift in Sources */,
 				B5FD674523103C4C007265B7 /* Scrapbook.swift in Sources */,
 				B51432F5223A515900F34D39 /* Document.swift in Sources */,
 				B5673CC32F266BE40008785F /* PreferencesWindowController.swift in Sources */,
 				B51864F72F1FA0AB00F3605A /* PDFViewController.swift in Sources */,
-				B51864F82F1FA0AB00F3605A /* ThumbnailViewController.swift in Sources */,
+				B51864F82F1FA0AB00F3605A /* DraggableThumbnailView.swift in Sources */,
 				B57C06932375EA320028CFF8 /* ToCViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -352,7 +356,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 82;
+				CURRENT_PROJECT_VERSION = 93;
 				DEAD_CODE_STRIPPING = YES;
 				INFOPLIST_FILE = ReView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -360,7 +364,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.5;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.01;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bensoft.ReView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -375,7 +379,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 82;
+				CURRENT_PROJECT_VERSION = 93;
 				DEAD_CODE_STRIPPING = YES;
 				INFOPLIST_FILE = ReView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -383,7 +387,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.5;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.01;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bensoft.ReView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

@@ -180,46 +180,43 @@ extension PDFViewController {
     }
     
     @IBAction func deletePage(_sender: Any?) {
-        guard let thePDFView, let document else { return }
-        
-        if let pageCount = thePDFView.document?.pageCount {
-            if pageCount > 1 {
-                if let selectedPages = theThumbnailView?.selectedPages {
-                    for _ in selectedPages {
-                        
-                        let selectedPageNo: Int? = (thePDFView.document!.index(for: thePDFView.currentPage!))
-                        
-                        let alert = NSAlert()
-                        alert.messageText = "Delete Page"
-                        alert.informativeText = ("Do you want to delete page " + String(selectedPageNo!+1) + "?")
-                        alert.addButton(withTitle: "OK")
-                        alert.addButton(withTitle: "Cancel")
-                        let result = alert.runModal()
-                        switch result {
-                        case NSApplication.ModalResponse.alertFirstButtonReturn:
-                            document.deletePage(at: selectedPageNo!)
-                        case NSApplication.ModalResponse.alertSecondButtonReturn:
-                            break
-                        default:
-                            break
-                        }
-                    }
-                } else {
-                    let alert = NSAlert()
-                    alert.messageText = "No Page Selected"
-                    alert.informativeText = "Select a page in the Thumbnail pane."
-                    alert.addButton(withTitle: "OK")
-                    alert.runModal()
-                }
-                
-                
-            } else {
-                let alert = NSAlert()
-                alert.messageText = "Only One Page"
-                alert.informativeText = "ReView will not delete the only page."
-                alert.addButton(withTitle: "OK")
-                alert.runModal()
-            }
+        guard let pdfDoc = document?.thePDFDocument, let document else { return }
+
+        let selected = theThumbnailView?.selectedPages ?? []
+        guard !selected.isEmpty else {
+            let alert = NSAlert()
+            alert.messageText = "No Page Selected"
+            alert.informativeText = "Select a page in the Thumbnail pane."
+            alert.addButton(withTitle: "OK")
+            alert.runModal()
+            return
         }
+
+        // Never delete every page
+        guard selected.count < pdfDoc.pageCount else {
+            let alert = NSAlert()
+            alert.messageText = "Can't Delete All Pages"
+            alert.informativeText = "ReView will not delete every page in the document."
+            alert.addButton(withTitle: "OK")
+            alert.runModal()
+            return
+        }
+
+        // Indexes, highest first so earlier removals don't shift later ones
+        let indexes = selected.map { pdfDoc.index(for: $0) }.sorted(by: >)
+
+        let alert = NSAlert()
+        alert.messageText = indexes.count == 1 ? "Delete Page" : "Delete \(indexes.count) Pages"
+        alert.informativeText = indexes.count == 1
+            ? "Do you want to delete page \(indexes[0] + 1)?"
+            : "Do you want to delete the \(indexes.count) selected pages?"
+        alert.addButton(withTitle: "OK")
+        alert.addButton(withTitle: "Cancel")
+        guard alert.runModal() == .alertFirstButtonReturn else { return }
+
+        for index in indexes {
+            document.deletePage(at: index)
+        }
+        loadViewParameters()
     }
 }
