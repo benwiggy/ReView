@@ -11,34 +11,31 @@ MacOS has some incredibly powerful and flexible APIs for viewing, printing and c
 
 4. Support creation and editing of PDF Bookmarks (e.g. Table of Contents). Preview's own 'bookmarks' are proprietary: they do not work in other PDF viewers. PDFKit has a perfectly good set of objects (PDFOutline) for working with bookmarks.
 
-5. Save As PDF/X-3 (using a better Filter than Apple's own); individual pages; booklet. Add a variety of text of graphics to existing document.
-
-6. Improved AppleScript support. Preview has only recently included any AppleScript support, and most of it is 'generic'. It would be good to include exporting to other formats.
-
-Much of this is far beyond my abilities, so please feel free to contribute! Grateful Acknowledgement is made to Howard Oakley, who provided the basic app template, and Pat Garner, who helped rewrite the sidebar UI code. 
 
 # Release Notes
 
-### v.1.0 Stable Release!
+### v.2.0 New Release!
 
-Version 1.0 has the following features:  
-* Opens PDFs for Viewing as 1-up or 2-up (with first page on its own or not); Single or Continuous pages.
-* Horizontal or vertical PDF page layouts (in Single Page Continuous mode).
-* Default view styles can be set in Preferences and saved.
-* Individual pages can be rotated left or right.
-* Individual pages can be deleted (with warning).
-* Blank pages can be added.
-* Print using accurate page positioning for duplexing with enhanced print panel.
-* Applies Quartz Filters to PDF documents.
-* Saves documents when asked, if altered.
-* New PDF from Clipboard image data.
-* Improved sidebar UI.
-* App is now signed, so will run on any Mac without annoyance.
-* Undo now supported for page rotation and deletion. (E.g. not for Quartz Filters.)
+ReView has been rewritten from scratch using SwiftUI. (Yes, Claude did the heavy lifting.) Much more robust implementation.
 
+* Import images as PDF and Export PDF as images. New documents from image data in Clipboard.
 
+* Supports drag and drop of page thumbnails in both directions: export selected pages, or import images/PDFs into the current document.
 
-#### To Do List and Known problems:
-* Dragging thumbnails is unreliable and not recommended.
-* Editing and Viewing PDF Outlines (bookmarks) in sidebar.
+* Export PDFs, split at Bookmarks, at any hierarchical level.
 
+* Support for encrypted PDFs.
+
+* Bookmarks can be created and edited.
+
+* Preferences save default view styles.
+
+* Support for Horizontal and Vertical page layout.
+
+* Support for Annotations and Markup: Notes, Highlighter; add text, lines and shapes.
+
+* Quartz Filters can be applied to the current document.
+
+* Document metadata (e.g. Title, Author, Creator) can be edited. 
+
+* Lower memory footprint than Preview!
