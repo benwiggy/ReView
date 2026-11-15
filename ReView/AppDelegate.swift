@@ -1,118 +1,64 @@
-//
-//  AppDelegate.swift
-//  MyPreview
-//
-//  Created by Ben on 14/03/2019.
-//  
-//
+import AppKit
+import SwiftUI
 
-//
-//  AppDelegate.swift
-//  MyPreview
-//
+final class AppDelegate: NSObject, NSApplicationDelegate {
 
-import Cocoa
-import PDFKit
+    private var settingsWindow: NSWindow?
 
-@NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
-
-    func applicationDidFinishLaunching(_ notification: Notification) {
-        // Wire the “New from Clipboard” menu programmatically
-        if let newMenuItem = NSApp.mainMenu?
-            .item(withTitle: "File")?
-            .submenu?
-            .item(withTitle: "New from Clipboard") {
-            newMenuItem.target = self
-            newMenuItem.action = #selector(myNewFile(_:))
-            newMenuItem.isEnabled = true // always enabled
+    @objc func showSettings(_ sender: Any?) {
+        if settingsWindow == nil {
+            let window = NSWindow(contentViewController: NSHostingController(rootView: SettingsView()))
+            window.title = "Settings"
+            window.styleMask = [.titled, .closable]
+            window.isReleasedWhenClosed = false
+            window.center()
+            settingsWindow = window
         }
+        settingsWindow?.makeKeyAndOrderFront(nil)
+        NSApp.activate(ignoringOtherApps: true)
     }
+    
+    private var inspectorPanel: NSPanel?
+    private var inspectorModel: InspectorModel?
 
-    // MARK: - Clipboard-based New command
-    @IBAction func myNewFile(_ sender: Any?) {
-        let pboard = NSPasteboard.general
-
-        // 1️⃣ PDF from clipboard
-        if let data = pboard.data(forType: .pdf),
-           let pdf = PDFDocument(data: data) {
-            createDocument(from: pdf)
+    /// View > Show Inspector (⌘I): one floating panel that follows the frontmost document.
+    @objc func toggleInspector(_ sender: Any?) {
+        if let panel = inspectorPanel, panel.isVisible {
+            panel.orderOut(nil)
             return
         }
-
-        // 2️⃣ Image from clipboard
-        let imageTypes: [NSPasteboard.PasteboardType] = [.tiff, .png]
-        if let _ = pboard.availableType(from: imageTypes),
-           let image = NSImage(pasteboard: pboard),
-           let page = PDFPage(image: image) {
-
-            // Create a PDFDocument and insert the page
-            let pdf = PDFDocument()
-            pdf.insert(page, at: 0)
-
-            // Display the document
-            createDocument(from: pdf)
-            return
+        if inspectorPanel == nil {
+            let model = InspectorModel()
+            let panel = NSPanel(contentViewController: NSHostingController(rootView: InspectorRootView(model: model)))
+            panel.title = "Inspector"
+            panel.styleMask = [.titled, .closable, .resizable, .utilityWindow]
+            panel.isFloatingPanel = true
+            panel.becomesKeyOnlyIfNeeded = true     // clicking a text field makes it key; nothing else does
+            panel.isReleasedWhenClosed = false
+            panel.setContentSize(NSSize(width: 320, height: 520))
+            panel.setFrameAutosaveName("InspectorPanel")
+            inspectorModel = model
+            inspectorPanel = panel
         }
-
-        // 3️⃣ Nothing usable — show alert
-        let alert = NSAlert()
-        alert.messageText = "No PDF or Image on Clipboard"
-        alert.informativeText = "The clipboard does not contain a valid PDF or image."
-        alert.addButton(withTitle: "OK")
-        alert.runModal()
+        inspectorPanel?.orderFront(nil)
     }
 
-    // MARK: - Create document using NSDocumentController
-
-    private func createDocument(from pdf: PDFDocument) {
-        // 1️⃣ Create a new Document instance directly
-        let doc = Document()
-        print("Created new Document instance")
-
-        // 2️⃣ Assign the PDFDocument to the document property
-        doc.load(pdfDocument: pdf)
-
-        // 3️⃣ Setup window controllers and show the window
-        doc.makeWindowControllers()
-        doc.showWindows()
-        print("Window controllers created and shown: \(doc.windowControllers.count)")
-
-        // 4️⃣ Assign the PDFDocument to the PDFView inside your SplitView
-        if let pdfView = doc.viewController?.pdfViewController?.thePDFView {
-            pdfView.document = pdf
-            print("Assigned PDFDocument to PDFView")
-        } else {
-            print("Could not find PDFViewController or thePDFView outlet is nil")
-        }
-    }
-    
-    
-    // Trigger Preferences window from menu item
-    @IBAction func showPreferences(_ sender: Any?) {
-        PreferencesWindowController.shared.showWindow(nil)
-        PreferencesWindowController.shared.window?.makeKeyAndOrderFront(nil)
-    }
-    
-    
-    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
-        return false
+    func applicationWillFinishLaunching(_ notification: Notification) {
+        NSApp.mainMenu = MenuBuilder.buildMainMenu()
     }
 
-    // MARK: - Optional: disable automatic untitled window at launch
-    func applicationShouldOpenUntitledFile(_ sender: NSApplication) -> Bool {
-        return false
-    }
+    // A viewer shouldn't conjure up an empty document at launch; use File > New or Open.
+    func applicationShouldOpenUntitledFile(_ sender: NSApplication) -> Bool { false }
 
-    func applicationWillTerminate(_ aNotification: Notification) {}
+    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool { false }
+
     func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool { true }
 }
 
-extension AppDelegate {
-    // Optional: menu validation to ensure menu is always enabled (or could add custom logic later)
-     func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
-        if menuItem.action == #selector(myNewFile(_:)) {
-            return true
+extension AppDelegate: NSMenuItemValidation {
+    func validateMenuItem(_ item: NSMenuItem) -> Bool {
+        if item.action == #selector(toggleInspector(_:)) {
+            item.title = inspectorPanel?.isVisible == true ? "Hide Inspector" : "Show Inspector"
         }
         return true
     }
