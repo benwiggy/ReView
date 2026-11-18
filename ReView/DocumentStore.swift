@@ -3,7 +3,7 @@ import Combine
 import PDFKit
 import Quartz
 
-enum SidebarTab: Int { case thumbnails, bookmarks }
+enum SidebarTab: Int { case thumbnails, bookmarks, annotations }
 
 /// Everything the UI shows and every edit the user can make. One store per open document.
 /// All methods are expected to run on the main thread.
@@ -38,6 +38,29 @@ final class DocumentStore: ObservableObject {
     @Published var displaysPageBreaks = true
     @Published var showSidebar = true
     @Published var sidebarTab: SidebarTab = .thumbnails
+    
+    
+    // MARK: Annotations
+
+    @Published var markupTool: MarkupTool = .select
+    @Published var markupColor: MarkupColor = .yellow
+    /// The Markup strip is hidden until asked for; hiding it also puts the Select tool back.
+    @Published var showMarkupStrip = false {
+        didSet { if !showMarkupStrip { markupTool = .select } }
+    }
+    /// Bumped when annotations are added or removed, so the Annotations list refreshes.
+    @Published var annotationRevision = 0
+    /// The row selected in the Annotations list (see AnnotationRow.id).
+    @Published var selectedAnnotationID: String?
+    /// Set when the app itself selects a row, so the page doesn't scroll to it.
+    var suppressRevealFor: String?
+    /// The markup selected on the page itself (text box, later shapes).
+    @Published var selectedMarkup: PlacedAnnotation?
+    var authorName: String { AppSettings.authorName }
+    /// The file's owner has forbidden commenting (and we haven't replaced its protection).
+    var commentingRestricted: Bool { security == nil && opened.restrictsCommenting }
+    
+    
     @Published var sidebarWidth: CGFloat = 230
     @Published var thumbnailWidth: CGFloat = AppSettings.thumbnailWidth
 
@@ -63,6 +86,7 @@ final class DocumentStore: ObservableObject {
         var password: String?            // what the user typed to open it
         var restrictsPrinting = false
         var restrictsCopying = false
+        var restrictsCommenting = false
         var ownerUnlocked = true
         var hasRestrictions: Bool { restrictsPrinting || restrictsCopying }
         var passwordIsOwner = false
@@ -142,6 +166,7 @@ final class DocumentStore: ObservableObject {
         opened = OpenedProtection(password: password,
                                   restrictsPrinting: !newPDF.allowsPrinting,
                                   restrictsCopying: !newPDF.allowsCopying,
+                                  restrictsCommenting: !newPDF.allowsCommenting,
                                   ownerUnlocked: newPDF.permissionsStatus == .owner,
                                   passwordIsOwner: password != nil && newPDF.permissionsStatus == .owner)
         security = nil
@@ -630,7 +655,7 @@ final class DocumentStore: ObservableObject {
         }
     }
 
-    private func replaceDocument(with newPDF: PDFDocument, bookmarks newMarks: [BookmarkNode], name: String) {
+     func replaceDocument(with newPDF: PDFDocument, bookmarks newMarks: [BookmarkNode], name: String) {
         let oldPDF = pdf
         let oldMarks = bookmarks
         cancelSearch()

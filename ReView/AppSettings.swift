@@ -18,9 +18,10 @@ enum AppSettings {
         static let firstPageIsCover = "firstPageIsCover"
         static let pageBreaks = "showPageBreaks"
         static let showSidebar = "showSidebar"
-        static let sidebarTab = "sidebarTab"               // 0 thumbnails, 1 bookmarks
+        static let sidebarTab = "sidebarTab"    // 0 thumbnails, 1 bookmarks, 2 annotations.
         static let sidebarWidth = "sidebarWidth"
         static let thumbnailWidth = "thumbnailWidth"
+        static let authorName = "annotationAuthor"      // empty: the Mac user's full name
     }
 
     static let sidebarWidthRange: ClosedRange<Double> = 200...420
@@ -38,7 +39,12 @@ enum AppSettings {
             Key.thumbnailWidth: 200.0
         ])
     }
-
+    /// Author recorded on annotations.
+    static var authorName: String {
+        let typed = (UserDefaults.standard.string(forKey: Key.authorName) ?? "").trimmingCharacters(in: .whitespaces)
+        return typed.isEmpty ? NSFullUserName() : typed
+    }
+    
     static var thumbnailWidth: CGFloat {
         let value = UserDefaults.standard.double(forKey: Key.thumbnailWidth)
         return CGFloat(min(max(value, thumbnailWidthRange.lowerBound), thumbnailWidthRange.upperBound))

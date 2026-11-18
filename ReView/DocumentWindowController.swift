@@ -27,6 +27,7 @@ final class DocumentWindowController: NSWindowController, NSWindowDelegate, NSTo
         static let delete = NSToolbarItem.Identifier("delete")
         static let filter = NSToolbarItem.Identifier("filter")
         static let bookmark = NSToolbarItem.Identifier("bookmark")
+        static let markup = NSToolbarItem.Identifier("markup")
         static let search = NSToolbarItem.Identifier("search")
     }
 
@@ -126,7 +127,7 @@ final class DocumentWindowController: NSWindowController, NSWindowDelegate, NSTo
     func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
         [ToolbarID.sidebar, ToolbarID.zoom, .space,
          ToolbarID.rotateLeft, ToolbarID.rotateRight, ToolbarID.addBlank, ToolbarID.delete, .space,
-         ToolbarID.bookmark, ToolbarID.filter, .flexibleSpace, ToolbarID.search]
+         ToolbarID.bookmark, ToolbarID.markup, ToolbarID.filter, .flexibleSpace, ToolbarID.search]
     }
 
     func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
@@ -137,7 +138,24 @@ final class DocumentWindowController: NSWindowController, NSWindowDelegate, NSTo
                  willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
         switch identifier {
         case ToolbarID.sidebar:
-            return button(identifier, "Sidebar", "sidebar.left", #selector(toggleSidebarPanel(_:)), "Show or Hide Sidebar (⌃⌘S)")
+            let item = NSMenuToolbarItem(itemIdentifier: identifier)
+            item.label = "Sidebar"
+            item.paletteLabel = "Sidebar"
+            item.toolTip = "Show or Hide Sidebar (⌃⌘S)"
+            item.image = NSImage(systemSymbolName: "sidebar.left", accessibilityDescription: "Sidebar")
+            item.target = nil
+            item.action = #selector(toggleSidebarPanel(_:))
+            let menu = NSMenu(title: "Sidebar")
+            menu.addItem(NSMenuItem(title: "Thumbnails", action: #selector(showThumbnails(_:)), keyEquivalent: ""))
+            menu.addItem(NSMenuItem(title: "Bookmarks", action: #selector(showBookmarks(_:)), keyEquivalent: ""))
+            menu.addItem(NSMenuItem(title: "Annotations", action: #selector(showAnnotations(_:)), keyEquivalent: ""))
+            menu.addItem(.separator())
+            menu.addItem(NSMenuItem(title: "Hide Sidebar", action: #selector(toggleSidebarPanel(_:)), keyEquivalent: ""))
+            item.menu = menu
+            return item
+        case ToolbarID.markup:
+            return button(identifier, "Markup", "pencil.tip.crop.circle", #selector(toggleMarkupStrip(_:)),
+                          "Show or Hide Markup Toolbar (⇧⌘A)")
         case ToolbarID.rotateLeft:
             return button(identifier, "Rotate Left", "rotate.left", #selector(rotateLeft(_:)), "Rotate Left (⌘L)")
         case ToolbarID.rotateRight:
@@ -247,10 +265,23 @@ final class DocumentWindowController: NSWindowController, NSWindowDelegate, NSTo
             return store.currentPage > 0
         case #selector(goLast(_:)), #selector(goNext(_:)):
             return store.currentPage < store.pageCount - 1
-        case #selector(goToPage(_:)):
+        case #selector(showGoToPage(_:)):
             return store.pageCount > 1
         case #selector(splitAtBookmarks(_:)):
             return !store.bookmarks.isEmpty && bookmarkSplitter == nil
+        case #selector(highlightSelection(_:)), #selector(underlineSelection(_:)), #selector(strikeOutSelection(_:)):
+            return store.canComment && store.hasTextSelection
+            
+        case #selector(deleteSelectedAnnotation(_:)):
+            return !editingText && store.canComment
+                && ((store.showSidebar && store.sidebarTab == .annotations && store.selectedAnnotationID != nil)
+                    || store.selectedMarkup != nil)
+        case #selector(addNote(_:)):
+            return store.canComment && store.pageCount > 0
+        case #selector(addNoteHere(_:)):
+            return store.canComment && MarkupPDFView.contextNoteSpot != nil
+        case #selector(flattenMarkup(_:)):
+            return store.canComment && store.pageCount > 0
         case #selector(findNext(_:)), #selector(findPrevious(_:)):
             return !store.searchResults.isEmpty
         case #selector(renameBookmark(_:)), #selector(deleteBookmark(_:)), #selector(addSubBookmark(_:)),
@@ -278,6 +309,10 @@ final class DocumentWindowController: NSWindowController, NSWindowDelegate, NSTo
             item.state = store.showSidebar && store.sidebarTab == .thumbnails ? .on : .off
         case #selector(showBookmarks(_:)):
             item.state = store.showSidebar && store.sidebarTab == .bookmarks ? .on : .off
+        case #selector(showAnnotations(_:)):
+            item.state = store.showSidebar && store.sidebarTab == .annotations ? .on : .off
+        case #selector(toggleMarkupStrip(_:)):
+            item.title = store.showMarkupStrip ? "Hide Markup Toolbar" : "Show Markup Toolbar"
         default:
             break
         }
@@ -385,7 +420,7 @@ final class DocumentWindowController: NSWindowController, NSWindowDelegate, NSTo
     @objc func goPrevious(_ sender: Any?) { store.goTo(max(store.currentPage - 1, 0)) }
     @objc func goNext(_ sender: Any?) { store.goTo(min(store.currentPage + 1, store.pageCount - 1)) }
 
-    @objc func goToPage(_ sender: Any?) {
+    @objc func showGoToPage(_ sender: Any?) {
         guard let window, store.pageCount > 0 else { return }
         let field = NSTextField(frame: NSRect(x: 0, y: 0, width: 120, height: 24))
         field.placeholderString = "1–\(store.pageCount)"
@@ -500,6 +535,47 @@ final class DocumentWindowController: NSWindowController, NSWindowDelegate, NSTo
         store.sidebarTab = .bookmarks
         store.showSidebar = true
     }
+    
+    @objc func showAnnotations(_ sender: Any?) {
+        store.sidebarTab = .annotations
+        store.showSidebar = true
+    }
+
+    
+    // MARK: Annotations
+
+    @objc func toggleMarkupStrip(_ sender: Any?) { store.showMarkupStrip.toggle() }
+    @objc func highlightSelection(_ sender: Any?) { store.markupSelection(.highlight) }
+    @objc func underlineSelection(_ sender: Any?) { store.markupSelection(.underline) }
+    @objc func strikeOutSelection(_ sender: Any?) { store.markupSelection(.strikeOut) }
+    @objc func flattenMarkup(_ sender: Any?) {
+        guard let window else { return }
+        if store.pagesToFlatten(includingComments: true) == 0 {
+            let info = NSAlert()
+            info.messageText = "Nothing to Flatten"
+            info.informativeText = "This document has no text boxes, shapes, lines or other markup."
+            info.beginSheetModal(for: window)
+            return
+        }
+        let alert = NSAlert()
+        alert.messageText = "Flatten Markup?"
+        alert.informativeText = "Text boxes, shapes and lines become part of the page. They can no longer be selected, moved or edited. You can undo this until you close the document."
+        let box = NSButton(checkboxWithTitle: "Also flatten highlights, underlines and notes", target: nil, action: nil)
+        box.sizeToFit()
+        alert.accessoryView = box
+        alert.addButton(withTitle: "Flatten")
+        alert.addButton(withTitle: "Cancel")
+        alert.beginSheetModal(for: window) { [store] response in
+            guard response == .alertFirstButtonReturn else { return }
+            store.flattenMarkup(includingComments: box.state == .on)
+        }
+    }
+    @objc func addNote(_ sender: Any?) { store.addNoteNearSelectionOrCentre() }
+    @objc func addNoteHere(_ sender: Any?) {
+        guard let spot = MarkupPDFView.contextNoteSpot, let view = store.pdfView else { return }
+        store.placeNote(on: spot.page, at: spot.point, in: view)
+    }
+    @objc func deleteSelectedAnnotation(_ sender: Any?) { store.deleteSelectedAnnotation() }
 
     // MARK: Search
 

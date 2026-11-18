@@ -14,6 +14,8 @@ MacOS has some incredibly powerful and flexible APIs for viewing, printing and c
 
 # Release Notes
 
+v.2.01. Fix for issue with 'Go to Page' dialog.
+
 ### v.2.0 New Release!
 
 ReView has been rewritten from scratch using SwiftUI. (Yes, Claude did the heavy lifting.) Much more robust implementation.
@@ -39,3 +41,5 @@ ReView has been rewritten from scratch using SwiftUI. (Yes, Claude did the heavy
 * Document metadata (e.g. Title, Author, Creator) can be edited. 
 
 * Lower memory footprint than Preview!
+
+

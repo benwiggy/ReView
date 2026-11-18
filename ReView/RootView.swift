@@ -6,19 +6,25 @@ struct PDFAreaView: View {
     @ObservedObject var store: DocumentStore
 
     var body: some View {
-        PDFKitView(store: store)
-            .overlay(alignment: .bottom) {
-                if store.isSearching || !store.searchResults.isEmpty {
-                    SearchStatusBar(store: store).padding(12)
-                }
+        VStack(spacing: 0) {
+            if store.showMarkupStrip {
+                MarkupStrip(store: store)
+                Divider()
             }
-            .overlay {
-                if store.isBusy {
-                    ProgressView("Applying filter…")
-                        .padding(20)
-                        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
+            PDFKitView(store: store)
+                .overlay(alignment: .bottom) {
+                    if store.isSearching || !store.searchResults.isEmpty {
+                        SearchStatusBar(store: store).padding(12)
+                    }
                 }
-            }
+                .overlay {
+                    if store.isBusy {
+                        ProgressView("Applying filter…")
+                            .padding(20)
+                            .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
+                    }
+                }
+        }
     }
 }
 
@@ -28,11 +34,13 @@ struct SidebarView: View {
     var body: some View {
         VStack(spacing: 0) {
             Picker("Sidebar", selection: $store.sidebarTab) {
-                Text("Thumbnails").tag(SidebarTab.thumbnails)
-                Text("Bookmarks").tag(SidebarTab.bookmarks)
+                Label("Thumbnails", systemImage: "square.grid.2x2").tag(SidebarTab.thumbnails)
+                Label("Bookmarks", systemImage: "bookmark").tag(SidebarTab.bookmarks)
+                Label("Annotations", systemImage: "highlighter").tag(SidebarTab.annotations)
             }
-            .pickerStyle(.segmented)
+            .pickerStyle(.menu)
             .labelsHidden()
+            .frame(maxWidth: .infinity)
             .padding(8)
 
             Divider()
@@ -40,6 +48,7 @@ struct SidebarView: View {
             switch store.sidebarTab {
             case .thumbnails: ThumbnailCollectionView(store: store)
             case .bookmarks:  BookmarksView(store: store)
+            case .annotations: AnnotationsView(store: store)
             }
         }
         .background(.background)

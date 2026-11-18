@@ -113,7 +113,9 @@ enum MenuBuilder {
             item("Undo", #selector(MenuUndoActions.undo(_:)), "z"),
             item("Redo", #selector(MenuUndoActions.redo(_:)), "z", [.command, .shift]),
             .separator(),
+            item("Cut", #selector(NSText.cut(_:)), "x"),
             item("Copy", #selector(NSText.copy(_:)), "c"),
+            item("Paste", #selector(NSText.paste(_:)), "v"),
             item("Select All", #selector(NSText.selectAll(_:)), "a"),
             .separator(),
             item("Find…", #selector(DocumentWindowController.focusSearch(_:)), "f"),
@@ -139,6 +141,7 @@ enum MenuBuilder {
             item("Hide Sidebar", #selector(DocumentWindowController.toggleSidebarPanel(_:)), "s", [.command, .control]),
             item("Thumbnails", #selector(DocumentWindowController.showThumbnails(_:)), "1", [.command, .control]),
             item("Bookmarks", #selector(DocumentWindowController.showBookmarks(_:)), "2", [.command, .control]),
+            item("Annotations", #selector(DocumentWindowController.showAnnotations(_:)), "3", [.command, .control]),
             .separator(),
             item("Show Inspector", #selector(AppDelegate.toggleInspector(_:)), "i"),
             .separator(),
@@ -153,7 +156,7 @@ enum MenuBuilder {
             item("Next Page", #selector(DocumentWindowController.goNext(_:)), functionKey(NSDownArrowFunctionKey)),
             item("Last Page", #selector(DocumentWindowController.goLast(_:)), functionKey(NSDownArrowFunctionKey), [.command, .shift]),
             .separator(),
-            item("Go to Page…", #selector(DocumentWindowController.goToPage(_:)), "g", [.command, .option])
+            item("Go to Page…", #selector(DocumentWindowController.showGoToPage(_:)), "g", [.command, .option])
         ]))
         
         // Pages
@@ -172,6 +175,20 @@ enum MenuBuilder {
             }()
         ]))
 
+        // Annotate
+        main.addItem(submenu("Annotate", [
+            item("Show Markup Toolbar", #selector(DocumentWindowController.toggleMarkupStrip(_:)), "a", [.command, .shift]),
+            .separator(),
+            item("Highlight Selection", #selector(DocumentWindowController.highlightSelection(_:)), "h", [.command, .shift]),
+            item("Underline Selection", #selector(DocumentWindowController.underlineSelection(_:)), "u", [.command, .shift]),
+            item("Strikethrough Selection", #selector(DocumentWindowController.strikeOutSelection(_:)), "x", [.command, .shift]),
+            item("Add Note", #selector(DocumentWindowController.addNote(_:)), "n", [.command, .option]),
+            .separator(),
+            item("Delete Annotation", #selector(DocumentWindowController.deleteSelectedAnnotation(_:)), backspace, []),
+            .separator(),
+            item("Flatten Markup…", #selector(DocumentWindowController.flattenMarkup(_:)))
+        ]))
+        
         // Bookmarks
         let option: NSEvent.ModifierFlags = [.command, .option]
         main.addItem(submenu("Bookmarks", [

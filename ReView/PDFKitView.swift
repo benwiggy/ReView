@@ -8,11 +8,13 @@ struct PDFKitView: NSViewRepresentable {
     func makeCoordinator() -> Coordinator { Coordinator(store: store) }
 
     func makeNSView(context: Context) -> PDFView {
-        let view = PDFView()
+        let view = MarkupPDFView()
+                view.store = store
         view.autoScales = true
         // True-size zoom is above 1 on most screens, so the default limit would stop 400% short.
         view.maxScaleFactor = 20
         view.minScaleFactor = 0.05
+        view.interpolationQuality = .high
         view.displayMode = store.displayMode
         view.displayDirection = store.effectiveDirection
         view.displaysAsBook = store.displaysAsBook
@@ -24,6 +26,7 @@ struct PDFKitView: NSViewRepresentable {
         coordinator.lastPDF = store.pdf
         coordinator.lastRevision = store.pageRevision
         coordinator.attach(to: view)
+        coordinator.monitor = MarkupEventMonitor(view: view, store: store)
         DispatchQueue.main.async { [weak store] in store?.refreshZoom() }
         return view
     }
@@ -68,6 +71,7 @@ struct PDFKitView: NSViewRepresentable {
         let store: DocumentStore
         var lastPDF: PDFDocument?
         var lastRevision = -1
+        var monitor: MarkupEventMonitor?
         private var observer: NSObjectProtocol?
         private var scaleObserver: NSObjectProtocol?
 
