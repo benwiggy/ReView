@@ -72,6 +72,6 @@ struct SettingsView: View {
                 .font(.caption).foregroundStyle(.secondary)
         }
         .formStyle(.grouped)
-        .frame(width: 480, height: 540)
+        .frame(width: 480, height: 640)
     }
 }
